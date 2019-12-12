@@ -52,7 +52,7 @@
                                 {% for course in courses %}
                                     <tr>
                                         <td><a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a></td>
-                                        <td><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.name }} ({{ course.id }})</a></td>
+                                        <td><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.name }} ({{ course.cid }})</a></td>
                                         <td>
                                             <div class="container-fluid mt-3 mb-3">
                                                 {% for keyword in course.keywords %}

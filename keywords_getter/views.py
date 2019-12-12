@@ -7,6 +7,7 @@ import bs4
 import pymorphy2
 import MySQLdb as sql
 import pandas as pd
+import json
 
 django.setup()
 
@@ -45,7 +46,7 @@ def get_keywords(request):
                 cid=cid_list[i],
                 name=name,
                 sdo=sdo,
-                keywords=kws[:5]
+                keywords=json.dumps(kws[:5])
             ).save()
     return redirect('/')
 
