@@ -22,6 +22,8 @@ def index(request):
         'courses': models.Course.objects.all()
     }
     request.session.create()
+    if not os.path.exists(settings.MEDIA_ROOT):
+        os.mkdir(settings.MEDIA_ROOT)
     media_path = os.path.join(settings.MEDIA_ROOT, request.session.session_key)
     if os.path.exists(media_path):
         shutil.rmtree(media_path)
