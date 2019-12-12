@@ -14,7 +14,7 @@ DEPLOYMENT TO SERVER
 --------------------
 1. Upgrade apt: `sudo apt update`
 2. Install git: `sudo apt install git`
-3. Download files from repository: `sudo git clone https://github.com/ioaksenenko/keywords_getter`
+3. Download files from repository: `sudo git clone http://git.2i.tusur.ru/aio/keywords_getter`
 4. Install python: `sudo apt install python3.6`
     > If you have the message:
         <div>"E: Unable to locate package python3.6"</div>
