@@ -29,7 +29,7 @@ DEPLOYMENT TO SERVER
 7. Create virtual environment: `sudo virtualenv venv`
 8. Activate virtual environment: `sudo source {path_to_venv}/bin/activate`
 9. Upgrade pip: `python3.6 -m pip install --upgrade pip`
-10. Install project requirements: `python3.6 -m pip install -r requirements`
+10. Install project requirements: `pip3 install -r requirements`
 11. Install the necessary dictionaries: `python3.6 -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"`
 12. Prepare django migrations: `python3.6 manage.py makemigrations`
 13. Make django migrations: `python3.6 manage.py migrate`
