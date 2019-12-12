@@ -1,0 +1,7 @@
+django==3.0
+requests==2.22.0
+bs4==0.0.1
+nltk==3.4.5
+pymorphy2==0.8
+mysqlclient==1.4.6
+pandas==0.25.3

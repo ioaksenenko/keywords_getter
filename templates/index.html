@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}" />
+    <script src="{% static "js/index.js" %}"></script>
+{% endblock %}
+{% block main %}
+    <form action="{% url 'get-keywords' %}" enctype="multipart/form-data" method="post" id="index-form">
+        {% csrf_token %}
+        <div class="container-fluid mt-3 mb-3">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sdo" id="online" value="online" checked>
+                        <label class="form-check-label" for="online"><a href="https://online.tusur.ru" target="_blank">online</a></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sdo" id="new-online" value="new-online">
+                        <label class="form-check-label" for="new-online"><a href="https://new-online.tusur.ru" target="_blank">new-online</a></label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="form-group mt-3">
+                        <label for="cid-list" class="d-none"></label>
+                        <input type="text" class="form-control" id="cid-list" name="cid-list" placeholder="" required>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary" id="submit" disabled>Получить</button>
+                        </div>
+                        <div class="col-auto">
+                            <div class="spinner-border text-primary d-none" role="status" id="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if courses and courses|length > 0 %}
+                <div class="row">
+                    <div class="col-auto">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">СДО</th>
+                                    <th scope="col">Название курса (Идентификатор курса)</th>
+                                    <th scope="col">Ключевые слова</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in courses %}
+                                    <tr>
+                                        <td><a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a></td>
+                                        <td><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.name }} ({{ course.id }})</a></td>
+                                        <td>
+                                            <div class="container-fluid mt-3 mb-3">
+                                                {% for keyword in course.keywords %}
+                                                    <div class="row">
+                                                        <div class="col-auto">{{ keyword.word }}</div>
+                                                        <div class="col-auto">{{ keyword.frequency }}</div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
