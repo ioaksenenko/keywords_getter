@@ -42,12 +42,21 @@ def get_keywords(request):
         for i in range(len(cid_list)):
             kws = calculate_frequencies(words_groups[i])
             name = get_course_name(sdo, cid_list[i])
-            models.Course(
-                cid=cid_list[i],
-                name=name,
-                sdo=sdo,
-                keywords=json.dumps(kws[:5])
-            ).save()
+            courses = models.Course.objects.all()
+            course_exist = False
+            for course in courses:
+                if course.cid == cid_list[i] and course.sdo == sdo:
+                    course.keywords = json.dumps(kws[:5])
+                    course.save()
+                    course_exist = True
+                    break
+            if not course_exist:
+                models.Course(
+                    cid=cid_list[i],
+                    name=name,
+                    sdo=sdo,
+                    keywords=json.dumps(kws[:5])
+                ).save()
     return redirect('/')
 
 
@@ -157,7 +166,7 @@ def calculate_frequencies(words):
     for word in uniq_words:
         res.append({
             'word': word,
-            'frequency': words.count(word) * 100 / len(words)
+            'frequency': round(words.count(word) * 100 / len(words), 2)
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
     return res

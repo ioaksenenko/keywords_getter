@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load filters %}
 {% block head %}
 	{{ block.super }}
 	<link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}" />
@@ -50,20 +51,15 @@
                             </thead>
                             <tbody>
                                 {% for course in courses %}
-                                    <tr>
-                                        <td><a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a></td>
-                                        <td><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.name }} ({{ course.cid }})</a></td>
-                                        <td>
-                                            <div class="container-fluid mt-3 mb-3">
-                                                {% for keyword in course.keywords %}
-                                                    <div class="row">
-                                                        <div class="col-auto">{{ keyword.word }}</div>
-                                                        <div class="col-auto">{{ keyword.frequency }}</div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {% for keyword in course.keywords|from_json %}
+                                        <tr class="{% if forloop.counter != 1 %}borderless{% endif %}">
+                                            <td class="align-middle">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a>{% endif %}</td>
+                                            <td class="align-middle">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.name }}</a>{% endif %}</td>
+                                            <td class="align-middle">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.cid }}</a>{% endif %}</td>
+                                            <td class="align-middle">{{ keyword.word }}</td>
+                                            <td class="align-middle">{{ keyword.frequency }}</td>
+                                        </tr>
+                                    {% endfor %}
                                 {% endfor %}
                             </tbody>
                         </table>
