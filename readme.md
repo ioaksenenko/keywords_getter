@@ -24,9 +24,7 @@ DEPLOYMENT TO SERVER
 9. Install the necessary dictionaries: `python3.6 -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"`
 10. Prepare django migrations: `python3.6 manage.py makemigrations`
 11. Make django migrations: `python3.6 manage.py migrate`
-12. Prepare django migrations for keywords_getter application: `python3.6 manage.py makemigrations keywords_getter`
-13. Make django migrations for keywords_getter application: `python3.6 manage.py migrate keywords_getter`
-14. Run the project: `python3.6 manage.py runserver 0.0.0.0:8000`
+12. Run the project: `python3.6 manage.py runserver 0.0.0.0:8000`
 
 USAGE
 -----
