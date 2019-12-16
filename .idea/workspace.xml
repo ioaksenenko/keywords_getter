@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/css/word-courses.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/word-courses.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/word-courses.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keywords_getter/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/keywords_getter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,23 +54,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3383">
-              <caret line="219" column="31" lean-forward="true" selection-start-line="219" selection-start-column="31" selection-end-line="219" selection-end-column="31" />
+            <state relative-caret-position="432">
+              <caret line="286" column="54" lean-forward="true" selection-start-line="286" selection-start-column="54" selection-end-line="286" selection-end-column="54" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#393#796#0" />
+                <element signature="e#830#1932#0" />
+                <element signature="e#1986#3636#0" />
+                <element signature="e#3691#3912#0" />
                 <element signature="e#3522#4298#0" />
+                <element signature="e#4341#4686#0" />
+                <element signature="e#4714#4843#0" />
+                <element signature="e#4881#4985#0" />
+                <element signature="e#5464#5537#0" />
+                <element signature="e#5623#6348#0" />
+                <element signature="e#5136#5193#0" />
+                <element signature="e#5229#5364#0" />
+                <element signature="e#5405#5686#0" />
+                <element signature="e#6180#7177#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://d0be03e9-19bb-44dd-8602-b5f3ca3d31ac/schema/main/table/keywords_getter_course">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="1d7b9f88-0582-4695-9a56-4a78dff5e646">
-              <filtering>
-                <filter text="" />
-              </filtering>
+        <entry file="file://$PROJECT_DIR$/static/css/word-courses.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -73,8 +89,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+            <state relative-caret-position="357">
+              <caret line="60" column="84" selection-start-line="60" selection-start-column="80" selection-end-line="60" selection-end-column="84" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/word-courses.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/keywords_getter/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="44" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="44" />
+              <folding>
+                <element signature="e#639#671#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,6 +122,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -101,7 +141,6 @@
       <list>
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/keywords_getter/models.py" />
-        <option value="$PROJECT_DIR$/keywords_getter/urls.py" />
         <option value="$PROJECT_DIR$/static/js/index.js" />
         <option value="$PROJECT_DIR$/requirements" />
         <option value="$PROJECT_DIR$/Dockerfile" />
@@ -111,7 +150,11 @@
         <option value="$PROJECT_DIR$/keywords_getter/settings.py" />
         <option value="$PROJECT_DIR$/static/css/index.css" />
         <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/static/js/word-courses.js" />
         <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/keywords_getter/urls.py" />
+        <option value="$PROJECT_DIR$/templates/word-courses.html" />
+        <option value="$PROJECT_DIR$/static/css/word-courses.css" />
         <option value="$PROJECT_DIR$/keywords_getter/views.py" />
       </list>
     </option>
@@ -121,7 +164,9 @@
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -143,27 +188,6 @@
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
               <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="63bhf52u52ehqpv2ounvkkbbs0w9447u" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="63bhf52u52ehqpv2ounvkkbbs0w9447u" type="462c0819:PsiDirectoryNode" />
-              <item name="296" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="63bhf52u52ehqpv2ounvkkbbs0w9447u" type="462c0819:PsiDirectoryNode" />
-              <item name="296" type="462c0819:PsiDirectoryNode" />
-              <item name="Введение_13321" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
@@ -195,10 +219,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite&#10;mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="SQL Dialects" />
@@ -264,17 +290,18 @@
       <workItem from="1576031306192" duration="20107000" />
       <workItem from="1576124131147" duration="10357000" />
       <workItem from="1576224777647" duration="3285000" />
-      <workItem from="1576479453741" duration="4242000" />
+      <workItem from="1576479453741" duration="8022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46577000" />
+    <option name="totallyTimeSpent" value="50357000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -288,7 +315,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -363,27 +390,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/keywords_getter/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#639#671#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
           <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -414,22 +424,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d0be03e9-19bb-44dd-8602-b5f3ca3d31ac/schema/main/table/keywords_getter_course">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="1d7b9f88-0582-4695-9a56-4a78dff5e646">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media/zsort2v8cgday8750e4nr0n0meo3ifky/296/Карта_курса_13320/09.03.01_ASU.HTML">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -448,13 +442,76 @@
     <entry file="file://$PROJECT_DIR$/media/63bhf52u52ehqpv2ounvkkbbs0w9447u/296/Введение_13321/Page1.HTML">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="das://d0be03e9-19bb-44dd-8602-b5f3ca3d31ac/schema/main/table/keywords_getter_course">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="1d7b9f88-0582-4695-9a56-4a78dff5e646">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/word-courses.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keywords_getter/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="44" />
+          <folding>
+            <element signature="e#639#671#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="60" column="84" selection-start-line="60" selection-start-column="80" selection-end-line="60" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/word-courses.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="1" lean-forward="true" selection-end-line="3" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/word-courses.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3383">
-          <caret line="219" column="31" lean-forward="true" selection-start-line="219" selection-start-column="31" selection-end-line="219" selection-end-column="31" />
+        <state relative-caret-position="432">
+          <caret line="286" column="54" lean-forward="true" selection-start-line="286" selection-start-column="54" selection-end-line="286" selection-end-column="54" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#393#796#0" />
+            <element signature="e#830#1932#0" />
+            <element signature="e#1986#3636#0" />
+            <element signature="e#3691#3912#0" />
             <element signature="e#3522#4298#0" />
+            <element signature="e#4341#4686#0" />
+            <element signature="e#4714#4843#0" />
+            <element signature="e#4881#4985#0" />
+            <element signature="e#5464#5537#0" />
+            <element signature="e#5623#6348#0" />
+            <element signature="e#5136#5193#0" />
+            <element signature="e#5229#5364#0" />
+            <element signature="e#5405#5686#0" />
+            <element signature="e#6180#7177#0" />
           </folding>
         </state>
       </provider>

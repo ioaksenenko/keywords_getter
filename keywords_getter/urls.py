@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('get-keywords/', views.get_keywords, name='get-keywords'),
+    path('word-courses/', views.word_courses, name='word-courses'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -1,0 +1,4 @@
+.borderless,
+.borderless td {
+    border: 0 !important;
+}

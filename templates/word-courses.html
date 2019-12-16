@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/word-courses.css" %}" />
+    <script src="{% static "js/word-courses.js" %}"></script>
+{% endblock %}
+{% block main %}
+    <div class="container-fluid mt-3 mb-3">
+        <div class="row">
+            <div class="col-auto">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Слово</th>
+                            <th scope="col">Название курса</th>
+                            <th scope="col">СДО</th>
+                            <th scope="col">ID курса</th>
+                            <th scope="col">Частота слова</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for word in words %}
+                            {% for course in word.courses %}
+                                <tr class="{% if forloop.counter != 1 %}borderless{% endif %}">
+                                    <td class="align-middle">{% if forloop.counter == 1 %}{{ word.word }}{% endif %}</td>
+                                    <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.name }}</a></td>
+                                    <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a></td>
+                                    <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.id }}</a></td>
+                                    <td class="align-middle">{{ course.frequency }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

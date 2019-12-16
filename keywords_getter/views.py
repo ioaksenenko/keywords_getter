@@ -217,7 +217,7 @@ def calculate_frequencies(words):
 
 
 def get_course_name(sdo, cid):
-    # return 'Неизвестный курс'
+    return 'Неизвестный курс'
     if sdo == 'online':
         connection = sql.connect(
             host='172.16.8.31',
@@ -258,3 +258,33 @@ def get_course_name(sdo, cid):
     else:
         res = 'Неизвестный курс'
     return res
+
+
+def word_courses(request):
+    courses = models.Course.objects.all()
+    context = {'words': []}
+    for course in courses:
+        words = json.loads(course.keywords)
+        for word in words:
+            exist = False
+            for element in context['words']:
+                if element['word'] == word['word']:
+                    element['courses'].append({
+                        'name': course.name,
+                        'id': course.cid,
+                        'sdo': course.sdo,
+                        'frequency': word['frequency']
+                    })
+                    exist = True
+                    break
+            if not exist:
+                context['words'].append({
+                    'word': word['word'],
+                    'courses': [{
+                        'name': course.name,
+                        'id': course.cid,
+                        'sdo': course.sdo,
+                        'frequency': word['frequency']
+                    }]
+                })
+    return render(request, 'word-courses.html', context)
