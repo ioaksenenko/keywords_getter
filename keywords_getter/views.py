@@ -287,4 +287,5 @@ def word_courses(request):
                         'frequency': word['frequency']
                     }]
                 })
+    context['words'] = list(filter(lambda word: len(word['courses']) != 1, context['words']))
     return render(request, 'word-courses.html', context)
