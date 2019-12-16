@@ -67,15 +67,26 @@ def download_files(sdo, cid_list, media_path):
         if os.path.exists(course_path):
             shutil.rmtree(course_path)
         os.mkdir(course_path)
-        response = requests.get(
-            f'https://{sdo}.tusur.ru/local/filemap/?courseid={cid}&key=cea17f418fc4227b647f75fe66fe859bd24ea752'
-        )
+        if sdo == 'online':
+            response = requests.get(
+                f'https://{sdo}.tusur.ru/local/filemap/?courseid={cid}&key=cea17f418fc4227b647f75fe66fe859bd24ea752'
+            )
+        else:
+            response = requests.post(
+                'https://new-online.tusur.ru/webservice/rest/server.php',
+                {
+                    'wstoken': 'a593d8ce00c027501c9609382ba31d28',
+                    'moodlewsrestformat': 'json',
+                    'wsfunction': 'local_lismo_api_filemap',
+                    'courseid': cid
+                }
+            )
         if response.status_code == 200:
             modules = response.json()
             for module in modules:
                 fragments = re.findall(r'[a-zA-Zа-яА-Я0-9_\s]+', module['name'])
                 module_path = os.path.join(
-                    course_path, ''.join(fragments).replace(' ', '_') + '_' + module['contextid']
+                    course_path, ''.join(fragments).replace(' ', '_') + '_' + str(module['contextid'])
                 )
                 if os.path.exists(module_path):
                     shutil.rmtree(module_path)
@@ -83,15 +94,23 @@ def download_files(sdo, cid_list, media_path):
                 with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
                     for file in module['files']:
                         if re.fullmatch(r'.+\.html', file['name'], re.I):
-                            futures.append(executor.submit(download_file, file, module_path))
+                            futures.append(executor.submit(download_file, file, sdo, module_path))
     for future in futures:
         future.result()
     return futures
 
 
-def download_file(file, module_path):
+def download_file(file, sdo, module_path):
     file_path = os.path.join(module_path, file['name'])
-    response = requests.get(file['url'])
+    if sdo == 'online':
+        response = requests.get(file['url'])
+    else:
+        response = requests.post(
+            'https://new-online.tusur.ru/webservice/pluginfile.php/' + file['path'],
+            {
+                'token': 'a593d8ce00c027501c9609382ba31d28'
+            }
+        )
     if response.status_code == 200:
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(response.text)
@@ -127,6 +146,7 @@ def get_words_from_file(file_path):
         tokens = get_tokens(txt)
         words = get_words_objects(tokens)
         words = remove_nonexistent_words(words)
+        words = filter_by_part_of_speech(words)
         words = get_norm_words(words)
         words = remove_stopwords(words)
     return words
@@ -146,6 +166,30 @@ def get_words_objects(tokens):
 
 def remove_nonexistent_words(words):
     res = list(filter(lambda x: x.tag.POS is not None, words))
+    return res
+
+
+def filter_by_part_of_speech(words):
+    parts_of_speech = [
+        'NOUN',  # имя существительное
+        'ADJF',  # имя прилагательное (полное)
+        'ADJS',  # имя прилагательное (краткое)
+        'COMP',  # компаратив
+        'VERB',  # глагол (личная форма)
+        'INFN',  # глагол (инфинитив)
+        'PRTF',  # причастие (полное)
+        'PRTS',  # причастие (краткое)
+        'GRND',  # деепричастие
+        # 'NUMR',  # числительное
+        # 'ADVB',  # наречие
+        # 'NPRO',  # местоимение-существительное
+        'PRED',  # предикатив
+        # 'PREP',  # предлог
+        # 'CONJ',  # союз
+        # 'PRCL',  # частица
+        'INTJ',  # междометие
+    ]
+    res = list(filter(lambda x: x.tag.POS in parts_of_speech, words))
     return res
 
 
@@ -173,6 +217,7 @@ def calculate_frequencies(words):
 
 
 def get_course_name(sdo, cid):
+    # return 'Неизвестный курс'
     if sdo == 'online':
         connection = sql.connect(
             host='172.16.8.31',
