@@ -16,6 +16,9 @@ from . import models, settings
 from concurrent.futures import ProcessPoolExecutor
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
+from rutermextract import TermExtractor
+from functools import reduce
+from multi_rake import Rake
 
 
 def index(request):
@@ -38,15 +41,16 @@ def get_keywords(request):
         cid_list = list(map(int, re.split(r',\s*', request.POST.get('cid-list'))))
         media_path = os.path.join(settings.MEDIA_ROOT, request.session.session_key)
         download_files(sdo, cid_list, media_path)
-        words_groups = get_words_from_files(cid_list, media_path)
+        words_groups, phrases_groups = get_words_from_files(cid_list, media_path)
         for i in range(len(cid_list)):
-            kws = calculate_frequencies(words_groups[i])
+            kws = calculate_words_frequencies(words_groups[i])
+            phr = calculate_phrases_frequencies(phrases_groups[i])
             name = get_course_name(sdo, cid_list[i])
             courses = models.Course.objects.all()
             course_exist = False
             for course in courses:
                 if course.cid == cid_list[i] and course.sdo == sdo:
-                    course.keywords = json.dumps(kws[:5])
+                    course.keywords = json.dumps(phr[:5] + kws[:5])
                     course.save()
                     course_exist = True
                     break
@@ -55,7 +59,7 @@ def get_keywords(request):
                     cid=cid_list[i],
                     name=name,
                     sdo=sdo,
-                    keywords=json.dumps(kws[:5])
+                    keywords=json.dumps(phr[:5] + kws[:5])
                 ).save()
     return redirect('/')
 
@@ -117,6 +121,8 @@ def download_file(file, sdo, module_path):
 
 
 def get_words_from_files(cid_list, media_path):
+    term_extractor = TermExtractor()
+    morph_analyzer = pymorphy2.MorphAnalyzer()
     futures_groups = []
     for cid in cid_list:
         course_path = os.path.join(media_path, str(cid))
@@ -126,30 +132,40 @@ def get_words_from_files(cid_list, media_path):
                 module_path = os.path.join(course_path, module_name)
                 for file_name in os.listdir(module_path):
                     file_path = os.path.join(module_path, file_name)
-                    futures.append(executor.submit(get_words_from_file, file_path))
+                    futures.append(executor.submit(get_words_from_file, term_extractor, morph_analyzer, file_path))
         futures_groups.append(futures)
 
     words_groups = []
+    phrases_groups = []
     for futures in futures_groups:
         words = []
+        phrases = []
+        text = ''
         for future in futures:
-            words += future.result()
+            w, p = future.result()
+            # w, txt = future.result()
+            words += w
+            # text += txt
+            phrases += p
         words_groups.append(words)
+        phrases_groups.append(phrases)
+        # phrases_groups.append(text)
 
-    return words_groups
+    return words_groups, phrases_groups
 
 
-def get_words_from_file(file_path):
+def get_words_from_file(term_extractor, morph_analyzer, file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         bs = bs4.BeautifulSoup(f.read(), 'html.parser')
         txt = bs.text
         tokens = get_tokens(txt)
-        words = get_words_objects(tokens)
+        words = get_words_objects(morph_analyzer, tokens)
         words = remove_nonexistent_words(words)
         words = filter_by_part_of_speech(words)
         words = get_norm_words(words)
         words = remove_stopwords(words)
-    return words
+        phrases = extract_phrases(term_extractor, morph_analyzer, txt)
+    return words, phrases
 
 
 def get_tokens(txt):
@@ -158,9 +174,8 @@ def get_tokens(txt):
     return res
 
 
-def get_words_objects(tokens):
-    morph = pymorphy2.MorphAnalyzer()
-    res = [morph.parse(tocken)[0] for tocken in tokens]
+def get_words_objects(morph_analyzer, tokens):
+    res = [morph_analyzer.parse(token)[0] for token in tokens]
     return res
 
 
@@ -204,7 +219,7 @@ def remove_stopwords(words):
     return res
 
 
-def calculate_frequencies(words):
+def calculate_words_frequencies(words):
     res = []
     uniq_words = list(set(words))
     for word in uniq_words:
@@ -213,6 +228,38 @@ def calculate_frequencies(words):
             'frequency': round(words.count(word) * 100 / len(words), 2)
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
+    return res
+
+
+def calculate_phrases_frequencies(phrases):
+    res = []
+    #"""
+    n = 0
+    terms = set([phrase[0] for phrase in phrases])
+    uniq_phrases = []
+    for term in terms:
+        count = 0
+        for phrase in phrases:
+            if phrase[0] == term:
+                count += phrase[1]
+        uniq_phrases.append((term, count))
+        n += count
+    for phrase in uniq_phrases:
+        res.append({
+            'word': phrase[0],
+            'frequency': round(phrase[1] * 100 / n, 2)
+        })
+    res = sorted(res, key=lambda k: k['frequency'], reverse=True)
+    #"""
+    """
+    rake = Rake()
+    terms = rake.apply(phrases)
+    for term in terms:
+        res.append({
+            'word': term[0],
+            'frequency': term[1]
+        })
+    """
     return res
 
 
@@ -289,3 +336,21 @@ def word_courses(request):
                 })
     context['words'] = list(filter(lambda word: len(word['courses']) != 1, context['words']))
     return render(request, 'word-courses.html', context)
+
+
+def extract_phrases(term_extractor, morph_analyzer, text):
+    res = []
+    terms = term_extractor(text)
+    for term in terms:
+        words = term.normalized.split()
+        words_objects = [morph_analyzer.parse(word)[0] for word in words]
+        exist_words = []
+        for words_object in words_objects:
+            if words_object.tag.POS is not None and len(words_object.methods_stack) == 1:
+                exist_words.append(words_object)
+            else:
+                words.remove(words_object.word)
+        if 1 < len(exist_words) < 4:
+            words = [words_object.word for words_object in exist_words]
+            res.append((' '.join(words), term.count))
+    return res
