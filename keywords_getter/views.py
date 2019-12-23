@@ -264,7 +264,7 @@ def calculate_phrases_frequencies(phrases):
 
 
 def get_course_name(sdo, cid):
-    return 'Неизвестный курс'
+    # return 'Неизвестный курс'
     if sdo == 'online':
         connection = sql.connect(
             host='172.16.8.31',
