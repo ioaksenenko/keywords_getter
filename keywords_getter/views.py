@@ -350,7 +350,8 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
             if words_object.tag.POS is not None and len(words_object.methods_stack) == 1:
                 exist_words.append(words_object)
             else:
-                words.remove(words_object.word)
+                if words_object.word in words:
+                    words.remove(words_object.word)
         if 1 < len(exist_words) < 4:
             words = [words_object.word for words_object in exist_words]
             phrase = ' '.join(words)
