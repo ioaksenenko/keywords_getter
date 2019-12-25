@@ -4,6 +4,7 @@
     <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/keywords_getter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements" beforeDir="false" afterPath="$PROJECT_DIR$/requirements" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,35 +47,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="265" column="30" selection-start-line="265" selection-start-column="30" selection-end-line="265" selection-end-column="30" />
+            <state relative-caret-position="-1336">
+              <caret line="150" column="34" lean-forward="true" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#462#865#0" />
-                <element signature="e#2164#3819#0" />
-                <element signature="e#3869#4345#0" />
-                <element signature="e#5834#5963#0" />
-                <element signature="e#6211#6313#0" />
-                <element signature="e#6232#6305#0" />
-                <element signature="e#6349#7067#0" />
-                <element signature="e#7101#7158#0" />
-                <element signature="e#7194#7329#0" />
-                <element signature="e#7376#7657#0" />
-                <element signature="e#8053#9080#0" />
-                <element signature="e#9114#10237#0" />
+                <element signature="e#6598#7316#0" />
+                <element signature="e#7443#7578#0" />
+                <element signature="e#7625#7906#0" />
+                <element signature="e#7957#8683#0" />
+                <element signature="e#8721#9748#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/requirements">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -127,6 +112,8 @@
       <find>split</find>
       <find>calculate_frequencies</find>
       <find>re</find>
+      <find>tag.POS</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,7 +156,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -225,6 +211,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -237,7 +224,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="SQL Dialects" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -305,22 +292,24 @@
       <workItem from="1576638441009" duration="3495000" />
       <workItem from="1576739982860" duration="7187000" />
       <workItem from="1576810590244" duration="14197000" />
+      <workItem from="1577069320118" duration="981000" />
+      <workItem from="1577157126097" duration="2082000" />
+      <workItem from="1577259376965" duration="3054000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80709000" />
+    <option name="totallyTimeSpent" value="86826000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27132195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2803838" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -329,7 +318,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -454,6 +443,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://d0be03e9-19bb-44dd-8602-b5f3ca3d31ac/schema/main/table/keywords_getter_course">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="740ca314-0ab0-4625-9bad-3c5fb629d4b3">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/i9h4cof4g1g0p658xyf9i6ni7yuyz0dc/696/Теоретический_материал_43564/Page1.HTML">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
@@ -478,44 +479,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://d0be03e9-19bb-44dd-8602-b5f3ca3d31ac/schema/main/table/keywords_getter_course">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="740ca314-0ab0-4625-9bad-3c5fb629d4b3">
-          <filtering>
-            <filter text="" />
-          </filtering>
+    <entry file="file://$PROJECT_DIR$/requirements">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/i9h4cof4g1g0p658xyf9i6ni7yuyz0dc/696/Теоретический_материал_43564/Page1.HTML">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="265" column="30" selection-start-line="265" selection-start-column="30" selection-end-line="265" selection-end-column="30" />
+        <state relative-caret-position="-1336">
+          <caret line="150" column="34" lean-forward="true" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#462#865#0" />
-            <element signature="e#2164#3819#0" />
-            <element signature="e#3869#4345#0" />
-            <element signature="e#5834#5963#0" />
-            <element signature="e#6211#6313#0" />
-            <element signature="e#6232#6305#0" />
-            <element signature="e#6349#7067#0" />
-            <element signature="e#7101#7158#0" />
-            <element signature="e#7194#7329#0" />
-            <element signature="e#7376#7657#0" />
-            <element signature="e#8053#9080#0" />
-            <element signature="e#9114#10237#0" />
+            <element signature="e#6598#7316#0" />
+            <element signature="e#7443#7578#0" />
+            <element signature="e#7625#7906#0" />
+            <element signature="e#7957#8683#0" />
+            <element signature="e#8721#9748#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="10" />
         </state>
       </provider>
     </entry>

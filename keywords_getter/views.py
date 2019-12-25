@@ -18,7 +18,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from rutermextract import TermExtractor
 from functools import reduce
-# from multi_rake import Rake
+from pyphrasy.inflect import PhraseInflector
 
 
 def index(request):
@@ -123,6 +123,7 @@ def download_file(file, sdo, module_path):
 def get_words_from_files(cid_list, media_path):
     term_extractor = TermExtractor()
     morph_analyzer = pymorphy2.MorphAnalyzer()
+    inflector = PhraseInflector(morph_analyzer)
     futures_groups = []
     for cid in cid_list:
         course_path = os.path.join(media_path, str(cid))
@@ -132,7 +133,7 @@ def get_words_from_files(cid_list, media_path):
                 module_path = os.path.join(course_path, module_name)
                 for file_name in os.listdir(module_path):
                     file_path = os.path.join(module_path, file_name)
-                    futures.append(executor.submit(get_words_from_file, term_extractor, morph_analyzer, file_path))
+                    futures.append(executor.submit(get_words_from_file, term_extractor, morph_analyzer, inflector, file_path))
         futures_groups.append(futures)
 
     words_groups = []
@@ -154,7 +155,7 @@ def get_words_from_files(cid_list, media_path):
     return words_groups, phrases_groups
 
 
-def get_words_from_file(term_extractor, morph_analyzer, file_path):
+def get_words_from_file(term_extractor, morph_analyzer, inflector, file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         bs = bs4.BeautifulSoup(f.read(), 'html.parser')
         txt = bs.text
@@ -164,7 +165,7 @@ def get_words_from_file(term_extractor, morph_analyzer, file_path):
         words = filter_by_part_of_speech(words)
         words = get_norm_words(words)
         words = remove_stopwords(words)
-        phrases = extract_phrases(term_extractor, morph_analyzer, txt)
+        phrases = extract_phrases(term_extractor, morph_analyzer, inflector, txt)
     return words, phrases
 
 
@@ -264,7 +265,7 @@ def calculate_phrases_frequencies(phrases):
 
 
 def get_course_name(sdo, cid):
-    # return 'Неизвестный курс'
+    return 'Неизвестный курс'
     if sdo == 'online':
         connection = sql.connect(
             host='172.16.8.31',
@@ -338,7 +339,7 @@ def word_courses(request):
     return render(request, 'word-courses.html', context)
 
 
-def extract_phrases(term_extractor, morph_analyzer, text):
+def extract_phrases(term_extractor, morph_analyzer, inflector, text):
     res = []
     terms = term_extractor(text)
     for term in terms:
@@ -352,5 +353,7 @@ def extract_phrases(term_extractor, morph_analyzer, text):
                 words.remove(words_object.word)
         if 1 < len(exist_words) < 4:
             words = [words_object.word for words_object in exist_words]
-            res.append((' '.join(words), term.count))
+            phrase = ' '.join(words)
+            phrase = inflector.inflect(phrase, 'nomn')
+            res.append((phrase, term.count))
     return res
