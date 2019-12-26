@@ -61,6 +61,7 @@ def get_keywords(request):
                     sdo=sdo,
                     keywords=json.dumps(phr[:5] + kws[:5])
                 ).save()
+        shutil.rmtree(media_path)
     return redirect('/')
 
 
@@ -88,13 +89,16 @@ def download_files(sdo, cid_list, media_path):
         if response.status_code == 200:
             modules = response.json()
             for module in modules:
-                fragments = re.findall(r'[a-zA-Zа-яА-Я0-9_\s]+', module['name'])
-                module_path = os.path.join(
-                    course_path, ''.join(fragments).replace(' ', '_') + '_' + str(module['contextid'])
-                )
+                module_path = os.path.join(course_path, str(module['contextid']))
                 if os.path.exists(module_path):
                     shutil.rmtree(module_path)
-                os.mkdir(module_path)
+                try:
+                    os.mkdir(module_path)
+                except OSError as e:
+                    if e.errno == 36:
+                        print('File name too long.')
+                    else:
+                        raise
                 with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
                     for file in module['files']:
                         if re.fullmatch(r'.+\.html', file['name'], re.I):
@@ -431,4 +435,5 @@ def auto_processing(request):
                     keywords=json.dumps(phr[:5] + kws[:5])
                 ).save()
         shutil.rmtree(os.path.join(media_path, str(df_course['id'].item())))
+    shutil.rmtree(media_path)
     return redirect('/')

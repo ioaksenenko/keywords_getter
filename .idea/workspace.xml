@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keywords_getter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,12 +48,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="434" lean-forward="true" selection-start-line="434" selection-end-line="434" />
+            <state relative-caret-position="355">
+              <caret line="97" column="31" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#507#910#0" />
-                <element signature="e#2209#3864#0" />
+                <element signature="e#944#2155#0" />
                 <element signature="e#3914#4390#0" />
                 <element signature="e#4445#5663#0" />
                 <element signature="e#5749#6249#0" />
@@ -69,6 +69,7 @@
                 <element signature="e#9880#11003#0" />
                 <element signature="e#11080#11843#0" />
                 <element signature="e#11872#12828#0" />
+                <element signature="e#12865#14108#0" />
               </folding>
             </state>
           </provider>
@@ -147,8 +148,8 @@
         <option value="$PROJECT_DIR$/static/css/word-courses.css" />
         <option value="$PROJECT_DIR$/templates/word-courses.html" />
         <option value="$PROJECT_DIR$/keywords_getter/urls.py" />
-        <option value="$PROJECT_DIR$/keywords_getter/views.py" />
         <option value="$PROJECT_DIR$/requirements" />
+        <option value="$PROJECT_DIR$/keywords_getter/views.py" />
       </list>
     </option>
   </component>
@@ -183,6 +184,19 @@
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
               <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="z0x70k0kbtbeawfa1trs3st1c62o3t9d" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="z0x70k0kbtbeawfa1trs3st1c62o3t9d" type="462c0819:PsiDirectoryNode" />
+              <item name="696" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
@@ -293,17 +307,18 @@
       <workItem from="1577157126097" duration="2082000" />
       <workItem from="1577259376965" duration="4524000" />
       <workItem from="1577333795754" duration="4082000" />
-      <workItem from="1577343223143" duration="536000" />
+      <workItem from="1577343223143" duration="2023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92914000" />
+    <option name="totallyTimeSpent" value="94401000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2867804" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2867804" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -317,7 +332,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -487,12 +502,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="434" lean-forward="true" selection-start-line="434" selection-end-line="434" />
+        <state relative-caret-position="355">
+          <caret line="97" column="31" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#507#910#0" />
-            <element signature="e#2209#3864#0" />
+            <element signature="e#944#2155#0" />
             <element signature="e#3914#4390#0" />
             <element signature="e#4445#5663#0" />
             <element signature="e#5749#6249#0" />
@@ -508,6 +523,7 @@
             <element signature="e#9880#11003#0" />
             <element signature="e#11080#11843#0" />
             <element signature="e#11872#12828#0" />
+            <element signature="e#12865#14108#0" />
           </folding>
         </state>
       </provider>
