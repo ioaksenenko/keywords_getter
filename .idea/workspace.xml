@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keywords_getter/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/keywords_getter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements" beforeDir="false" afterPath="$PROJECT_DIR$/requirements" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,15 +50,27 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1336">
-              <caret line="150" column="34" lean-forward="true" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
+            <state relative-caret-position="160">
+              <caret line="407" column="20" selection-start-line="407" selection-start-column="20" selection-end-line="407" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#6598#7316#0" />
-                <element signature="e#7443#7578#0" />
-                <element signature="e#7625#7906#0" />
-                <element signature="e#7957#8683#0" />
-                <element signature="e#8721#9748#0" />
+                <element signature="e#507#910#0" />
+                <element signature="e#2209#3864#0" />
+                <element signature="e#3914#4390#0" />
+                <element signature="e#4445#5663#0" />
+                <element signature="e#5749#6249#0" />
+                <element signature="e#6277#6406#0" />
+                <element signature="e#6460#6533#0" />
+                <element signature="e#6577#6650#0" />
+                <element signature="e#6694#7412#0" />
+                <element signature="e#7446#7503#0" />
+                <element signature="e#7539#7674#0" />
+                <element signature="e#7721#8002#0" />
+                <element signature="e#8053#8779#0" />
+                <element signature="e#8817#9846#0" />
+                <element signature="e#9880#11003#0" />
+                <element signature="e#11080#11843#0" />
+                <element signature="e#11872#12828#0" />
               </folding>
             </state>
           </provider>
@@ -85,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/keywords_getter/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="26" column="44" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="44" />
+            <state relative-caret-position="476">
+              <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
               <folding>
                 <element signature="e#639#671#0" expanded="true" />
               </folding>
@@ -134,15 +146,15 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/static/js/word-courses.js" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/keywords_getter/urls.py" />
         <option value="$PROJECT_DIR$/static/css/word-courses.css" />
         <option value="$PROJECT_DIR$/templates/word-courses.html" />
         <option value="$PROJECT_DIR$/requirements" />
+        <option value="$PROJECT_DIR$/keywords_getter/urls.py" />
         <option value="$PROJECT_DIR$/keywords_getter/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="731" />
     <option name="y" value="77" />
     <option name="width" value="974" />
@@ -172,19 +184,6 @@
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
               <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="i9h4cof4g1g0p658xyf9i6ni7yuyz0dc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="i9h4cof4g1g0p658xyf9i6ni7yuyz0dc" type="462c0819:PsiDirectoryNode" />
-              <item name="696" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
@@ -294,17 +293,19 @@
       <workItem from="1576810590244" duration="14197000" />
       <workItem from="1577069320118" duration="981000" />
       <workItem from="1577157126097" duration="2082000" />
-      <workItem from="1577259376965" duration="3054000" />
+      <workItem from="1577259376965" duration="4524000" />
+      <workItem from="1577333795754" duration="3032000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86826000" />
+    <option name="totallyTimeSpent" value="91328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2803838" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2835821" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -455,6 +456,13 @@
     <entry file="file://$PROJECT_DIR$/media/i9h4cof4g1g0p658xyf9i6ni7yuyz0dc/696/Теоретический_материал_43564/Page1.HTML">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
@@ -471,32 +479,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="44" />
+        <state relative-caret-position="476">
+          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
           <folding>
             <element signature="e#639#671#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1336">
-          <caret line="150" column="34" lean-forward="true" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
+        <state relative-caret-position="160">
+          <caret line="407" column="20" selection-start-line="407" selection-start-column="20" selection-end-line="407" selection-end-column="20" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#6598#7316#0" />
-            <element signature="e#7443#7578#0" />
-            <element signature="e#7625#7906#0" />
-            <element signature="e#7957#8683#0" />
-            <element signature="e#8721#9748#0" />
+            <element signature="e#507#910#0" />
+            <element signature="e#2209#3864#0" />
+            <element signature="e#3914#4390#0" />
+            <element signature="e#4445#5663#0" />
+            <element signature="e#5749#6249#0" />
+            <element signature="e#6277#6406#0" />
+            <element signature="e#6460#6533#0" />
+            <element signature="e#6577#6650#0" />
+            <element signature="e#6694#7412#0" />
+            <element signature="e#7446#7503#0" />
+            <element signature="e#7539#7674#0" />
+            <element signature="e#7721#8002#0" />
+            <element signature="e#8053#8779#0" />
+            <element signature="e#8817#9846#0" />
+            <element signature="e#9880#11003#0" />
+            <element signature="e#11080#11843#0" />
+            <element signature="e#11872#12828#0" />
           </folding>
         </state>
       </provider>

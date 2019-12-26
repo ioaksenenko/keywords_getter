@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('get-keywords/', views.get_keywords, name='get-keywords'),
     path('word-courses/', views.word_courses, name='word-courses'),
+    path('auto-processing/', views.auto_processing, name='auto-processing'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

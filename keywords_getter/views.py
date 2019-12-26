@@ -358,3 +358,76 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
             phrase = inflector.inflect(phrase, 'nomn')
             res.append((phrase, term.count))
     return res
+
+
+def get_courses(sdo):
+    if sdo == 'online':
+        connection = sql.connect(
+            host='172.16.8.31',
+            port=3306,
+            user='aio',
+            passwd='acw-6l8q',
+            db='online',
+            charset='utf8',
+            init_command='SET NAMES UTF8'
+        )
+    elif sdo == 'new-online':
+        connection = sql.connect(
+            host='172.16.9.53',
+            port=3306,
+            user='aio',
+            passwd='acw-6l8q',
+            db='moodle_online',
+            charset='utf8',
+            init_command='SET NAMES UTF8'
+        )
+    else:
+        connection = None
+
+    if connection is not None:
+        df = pd.read_sql(
+            """
+                SELECT
+                    c.id,
+                    c.fullname
+                FROM
+                    mdl_course AS c
+                WHERE
+                    c.category = 1
+            """,
+            connection
+        )
+        return df
+    else:
+        return None
+
+
+def auto_processing(request):
+    sdo = 'new-online'
+    df_courses = get_courses(sdo).head(2)
+    media_path = os.path.join(settings.MEDIA_ROOT, request.session.session_key)
+    for idx in df_courses.index:
+        df_course = df_courses[df_courses.index == idx]
+        cid_list = list(df_course['id'])
+        download_files(sdo, cid_list, media_path)
+        words_groups, phrases_groups = get_words_from_files(cid_list, media_path)
+        for i in range(len(cid_list)):
+            kws = calculate_words_frequencies(words_groups[i])
+            phr = calculate_phrases_frequencies(phrases_groups[i])
+            name = df_course['fullname'].item()
+            courses = models.Course.objects.all()
+            course_exist = False
+            for course in courses:
+                if course.cid == cid_list[i] and course.sdo == sdo:
+                    course.keywords = json.dumps(phr[:5] + kws[:5])
+                    course.save()
+                    course_exist = True
+                    break
+            if not course_exist:
+                models.Course(
+                    cid=cid_list[i],
+                    name=name,
+                    sdo=sdo,
+                    keywords=json.dumps(phr[:5] + kws[:5])
+                ).save()
+    return redirect('/')
