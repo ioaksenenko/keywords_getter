@@ -5,6 +5,5 @@ nltk==3.4.5
 pymorphy2==0.8
 mysqlclient==1.4.6
 pandas==0.25.3
-multi-rake==0.0.1
 rutermextract==0.3
 https://github.com/summerisgone/pyphrasy/archive/master.zip

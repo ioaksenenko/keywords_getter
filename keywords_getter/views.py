@@ -430,4 +430,5 @@ def auto_processing(request):
                     sdo=sdo,
                     keywords=json.dumps(phr[:5] + kws[:5])
                 ).save()
+        shutil.rmtree(os.path.join(media_path, str(df_course['id'].item())))
     return redirect('/')
