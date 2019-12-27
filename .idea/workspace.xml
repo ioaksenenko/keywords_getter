@@ -49,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="163" column="15" lean-forward="true" selection-start-line="163" selection-start-column="15" selection-end-line="163" selection-end-column="15" />
+            <state relative-caret-position="243">
+              <caret line="163" column="20" selection-start-line="163" selection-start-column="20" selection-end-line="163" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#507#910#0" />
@@ -187,27 +187,6 @@
             <path>
               <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
               <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="ls3js5zvpgt0jmklt32pyabxa9ypi3p3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="ls3js5zvpgt0jmklt32pyabxa9ypi3p3" type="462c0819:PsiDirectoryNode" />
-              <item name="34" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="ls3js5zvpgt0jmklt32pyabxa9ypi3p3" type="462c0819:PsiDirectoryNode" />
-              <item name="34" type="462c0819:PsiDirectoryNode" />
-              <item name="26385" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="keywords_getter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="keywords_getter" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -316,22 +295,23 @@
       <workItem from="1577259376965" duration="4524000" />
       <workItem from="1577333795754" duration="4082000" />
       <workItem from="1577343223143" duration="2776000" />
-      <workItem from="1577419534924" duration="1436000" />
+      <workItem from="1577419534924" duration="2501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96590000" />
+    <option name="totallyTimeSpent" value="97655000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28997868" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28997868" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -340,7 +320,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -511,8 +491,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="163" column="15" lean-forward="true" selection-start-line="163" selection-start-column="15" selection-end-line="163" selection-end-column="15" />
+        <state relative-caret-position="243">
+          <caret line="163" column="20" selection-start-line="163" selection-start-column="20" selection-end-line="163" selection-end-column="20" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#507#910#0" />
