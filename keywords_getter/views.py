@@ -407,7 +407,7 @@ def get_courses(sdo):
 
 
 def auto_processing(request):
-    sdo = 'new-online'
+    sdo = 'online'
     df_courses = get_courses(sdo)
     media_path = os.path.join(settings.MEDIA_ROOT, request.session.session_key)
     for idx in df_courses.index:
