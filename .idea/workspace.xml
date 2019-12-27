@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="" />
+    <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/keywords_getter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,29 +48,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="439" lean-forward="true" selection-start-line="439" selection-end-line="439" />
+            <state relative-caret-position="245">
+              <caret line="165" column="21" lean-forward="true" selection-start-line="165" selection-start-column="21" selection-end-line="165" selection-end-column="21" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#507#910#0" />
-                <element signature="e#944#2155#0" />
-                <element signature="e#2209#3864#0" />
-                <element signature="e#3914#4390#0" />
-                <element signature="e#4445#5663#0" />
-                <element signature="e#5749#6249#0" />
-                <element signature="e#6277#6406#0" />
-                <element signature="e#6460#6533#0" />
-                <element signature="e#6577#6650#0" />
-                <element signature="e#6694#7412#0" />
-                <element signature="e#7446#7503#0" />
-                <element signature="e#7539#7674#0" />
-                <element signature="e#7721#8002#0" />
-                <element signature="e#8053#8779#0" />
-                <element signature="e#8817#9846#0" />
-                <element signature="e#9880#11003#0" />
-                <element signature="e#11080#11843#0" />
-                <element signature="e#11872#12828#0" />
-                <element signature="e#12865#14108#0" />
               </folding>
             </state>
           </provider>
@@ -166,7 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -204,6 +187,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -289,16 +273,17 @@
       <workItem from="1577259376965" duration="4524000" />
       <workItem from="1577333795754" duration="4082000" />
       <workItem from="1577343223143" duration="2776000" />
+      <workItem from="1577419534924" duration="899000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95154000" />
+    <option name="totallyTimeSpent" value="96053000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2867804" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28997868" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -312,7 +297,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -446,8 +431,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/i9h4cof4g1g0p658xyf9i6ni7yuyz0dc/696/Теоретический_материал_43564/Page1.HTML">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/media/i9h4cof4g1g0p658xyf9i6ni7yuyz0dc/696/Теоретический_материал_43564/Page1.HTML" />
+    <entry file="file://$PROJECT_DIR$/requirements">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="165" column="21" lean-forward="true" selection-start-line="165" selection-start-column="21" selection-end-line="165" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#507#910#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -469,42 +470,6 @@
           <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
           <folding>
             <element signature="e#639#671#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keywords_getter/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="439" lean-forward="true" selection-start-line="439" selection-end-line="439" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#507#910#0" />
-            <element signature="e#944#2155#0" />
-            <element signature="e#2209#3864#0" />
-            <element signature="e#3914#4390#0" />
-            <element signature="e#4445#5663#0" />
-            <element signature="e#5749#6249#0" />
-            <element signature="e#6277#6406#0" />
-            <element signature="e#6460#6533#0" />
-            <element signature="e#6577#6650#0" />
-            <element signature="e#6694#7412#0" />
-            <element signature="e#7446#7503#0" />
-            <element signature="e#7539#7674#0" />
-            <element signature="e#7721#8002#0" />
-            <element signature="e#8053#8779#0" />
-            <element signature="e#8817#9846#0" />
-            <element signature="e#9880#11003#0" />
-            <element signature="e#11080#11843#0" />
-            <element signature="e#11872#12828#0" />
-            <element signature="e#12865#14108#0" />
           </folding>
         </state>
       </provider>

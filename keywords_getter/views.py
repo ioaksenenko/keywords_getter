@@ -160,8 +160,9 @@ def get_words_from_files(cid_list, media_path):
 
 
 def get_words_from_file(term_extractor, morph_analyzer, inflector, file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        bs = bs4.BeautifulSoup(f.read(), 'html.parser')
+    with open(file_path, 'r') as f:
+        c = f.read().encode('utf-8').strip()
+        bs = bs4.BeautifulSoup(c, 'html.parser')
         txt = bs.text
         tokens = get_tokens(txt)
         words = get_words_objects(morph_analyzer, tokens)
