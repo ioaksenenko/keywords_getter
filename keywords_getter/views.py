@@ -160,7 +160,7 @@ def get_words_from_files(cid_list, media_path):
 
 
 def get_words_from_file(term_extractor, morph_analyzer, inflector, file_path):
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         c = f.read().encode('utf-8').strip()
         bs = bs4.BeautifulSoup(c, 'html.parser')
         txt = bs.text
@@ -270,7 +270,7 @@ def calculate_phrases_frequencies(phrases):
 
 
 def get_course_name(sdo, cid):
-    # return 'Неизвестный курс'
+    #return 'Неизвестный курс'
     if sdo == 'online':
         connection = sql.connect(
             host='172.16.8.31',
