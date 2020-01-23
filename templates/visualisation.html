@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/visualisation.css" %}" />
+    <script src="{% static "js/visualisation.js" %}"></script>
+{% endblock %}
+{% block main %}
+    <div class="container-fluid mt-3 mb-3">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <img src="{{ src }}" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+    </div>
+{% endblock %}

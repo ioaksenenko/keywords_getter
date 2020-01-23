@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="online">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.15">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.17">
     <root id="1">
       <ServerVersion>5.5.40</ServerVersion>
       <DefaultEngine>MyISAM</DefaultEngine>
@@ -15,7 +15,6 @@
     </schema>
     <schema id="4" parent="1" name="online">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>latin1_swedish_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="phpmyadmin">

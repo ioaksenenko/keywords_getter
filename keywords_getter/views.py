@@ -8,6 +8,8 @@ import pymorphy2
 import MySQLdb as sql
 import pandas as pd
 import json
+import matplotlib.pyplot as plt
+import random
 
 django.setup()
 
@@ -19,6 +21,8 @@ from nltk.corpus import stopwords
 from rutermextract import TermExtractor
 from functools import reduce
 from pyphrasy.inflect import PhraseInflector
+from matplotlib.patches import BoxStyle
+from matplotlib import cm
 
 
 def index(request):
@@ -61,7 +65,7 @@ def get_keywords(request):
                     sdo=sdo,
                     keywords=json.dumps(phr[:5] + kws[:5])
                 ).save()
-        shutil.rmtree(media_path)
+        # shutil.rmtree(media_path)
     return redirect('/')
 
 
@@ -314,13 +318,20 @@ def get_course_name(sdo, cid):
 
 
 def word_courses(request):
+    context = {
+        'words': get_words_courses()
+    }
+    return render(request, 'word-courses.html', context)
+
+
+def get_words_courses():
+    res = []
     courses = models.Course.objects.all()
-    context = {'words': []}
     for course in courses:
         words = json.loads(course.keywords)
         for word in words:
             exist = False
-            for element in context['words']:
+            for element in res:
                 if element['word'] == word['word']:
                     element['courses'].append({
                         'name': course.name,
@@ -331,7 +342,7 @@ def word_courses(request):
                     exist = True
                     break
             if not exist:
-                context['words'].append({
+                res.append({
                     'word': word['word'],
                     'courses': [{
                         'name': course.name,
@@ -340,8 +351,8 @@ def word_courses(request):
                         'frequency': word['frequency']
                     }]
                 })
-    context['words'] = list(filter(lambda word: len(word['courses']) != 1, context['words']))
-    return render(request, 'word-courses.html', context)
+    res = list(filter(lambda word: len(word['courses']) != 1, res))
+    return res
 
 
 def extract_phrases(term_extractor, morph_analyzer, inflector, text):
@@ -438,3 +449,74 @@ def auto_processing(request):
         shutil.rmtree(os.path.join(media_path, str(df_course['id'].item())))
     shutil.rmtree(media_path)
     return redirect('/')
+
+
+def visualisation(request):
+    plt.rcParams['figure.figsize'] = [20, 20]
+    plt.subplots_adjust(top=1, bottom=0, right=1, left=0, hspace=0, wspace=0)
+    plt.margins(0.07, 0.02)
+    plt.axis('off')
+
+    words = get_words_courses()
+    courses = []
+    coordinates = []
+    j = 0
+
+    for i in range(len(words)):
+        plt.text(
+            0,
+            i / 10,
+            words[i]['word'],
+            fontsize=14,
+            ha="center",
+            va="center",
+            bbox=dict(
+                boxstyle=BoxStyle.Round(rounding_size=1.5, pad=1),
+                fc=(0.18, 0.70, 0.49),
+                linewidth=0
+            )
+        )
+        for course in words[i]['courses']:
+            if course['id'] not in courses:
+                plt.text(
+                    1,
+                    j / 10,
+                    course['name'],
+                    fontsize=14,
+                    ha="center",
+                    va="center",
+                    bbox=dict(
+                        boxstyle=BoxStyle.Square(pad=1),
+                        fc=(0.56, 0.84, 0.27),
+                        linewidth=0
+                    )
+                )
+                courses.append(course['id'])
+                coordinates.append((1, j / 10))
+                j += 1
+
+        viridis = cm.get_cmap('viridis', len(courses))
+        for course in words[i]['courses']:
+            index = courses.index(course['id'])
+            plt.plot(
+                [0, 1],
+                [i / 10, coordinates[index][1]],
+                color=viridis.colors[index],
+                linestyle='-',
+                linewidth=1
+            )
+
+    if not os.path.exists(settings.MEDIA_ROOT):
+        os.mkdir(settings.MEDIA_ROOT)
+    img_path = os.path.join(settings.MEDIA_ROOT, 'img')
+    if not os.path.exists(img_path):
+        os.mkdir(img_path)
+    img_path = os.path.join(img_path, 'visualisation.png')
+
+    context = {
+        'src': '\\' + img_path[img_path.index('media'):]
+    }
+
+    plt.savefig(img_path)
+
+    return render(request, 'visualisation.html', context)
