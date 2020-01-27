@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db6ecae-a4dd-43d7-b390-940db2ebeae9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/js/colorbrewer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/d3.v3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/geometry.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/jquery.browser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/json/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/json/objects.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keywords_getter/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keywords_getter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/keywords_getter/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements" beforeDir="false" afterPath="$PROJECT_DIR$/requirements" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/visualisation.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/visualisation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/visualisation.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/visualisation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/visualisation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visualisation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,18 +65,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>pymorphy2</find>
-      <find>split</find>
-      <find>calculate_frequencies</find>
-      <find>re</find>
-      <find>tag.POS</find>
-      <find>print</find>
-      <find>презентация</find>
-      <find>презентаци</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -83,7 +83,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -91,11 +91,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\py\dev\lismo\keywords_getter" />
-      <recent name="F:\py\dev\lismo\keywords_getter\keywords_getter" />
-      <recent name="F:\py\dev\lismo\keywords_getter\static\img" />
       <recent name="F:\py\dev\lismo\keywords_getter\static" />
       <recent name="F:\py\dev\lismo\keywords_getter\static\css" />
+      <recent name="F:\py\dev\lismo\keywords_getter\static\js" />
+      <recent name="F:\py\dev\lismo\keywords_getter" />
+      <recent name="F:\py\dev\lismo\keywords_getter\keywords_getter" />
     </key>
   </component>
   <component name="RunManager">
@@ -169,7 +169,9 @@
       <workItem from="1579663530988" duration="3818000" />
       <workItem from="1579747822561" duration="4996000" />
       <workItem from="1579756792672" duration="2966000" />
-      <workItem from="1579766806361" duration="1387000" />
+      <workItem from="1579766806361" duration="2026000" />
+      <workItem from="1579841182273" duration="653000" />
+      <workItem from="1580100794093" duration="3548000" />
     </task>
     <servers />
   </component>
@@ -177,26 +179,26 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1579663545555">
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1579841204351">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579663545555" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1579759760816">
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579841204351" />
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1580112049343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579759760816" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1579759760816">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580112049343" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1580112049343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579759760816" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1579759760816">
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580112049343" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1580112049343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579759760816" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1579759760816">
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580112049343" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1580112049343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579759760816" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580112049343" />
     <state x="463" y="166" key="SettingsEditor" timestamp="1579577819093">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

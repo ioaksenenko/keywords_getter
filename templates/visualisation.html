@@ -9,8 +9,16 @@
 {% block main %}
     <div class="container-fluid mt-3 mb-3">
         <div class="row align-items-center">
-            <div class="col-auto">
-                <img src="{{ src }}" class="img-fluid" alt="Responsive image">
+            <div class="col">
+                <div id="split-container">
+                    <div id="graph-container">
+                        <div id="graph"></div>
+                    </div>
+                    <div id="docs-container">
+                        <a id="docs-close" href="#">&times;</a>
+                        <div id="docs" class="docs"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

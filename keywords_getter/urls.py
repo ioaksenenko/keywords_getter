@@ -27,6 +27,8 @@ urlpatterns = [
     path('word-courses/', views.word_courses, name='word-courses'),
     path('auto-processing/', views.auto_processing, name='auto-processing'),
     path('visualisation/', views.visualisation, name='visualisation'),
+    path('get-json/', views.get_json, name='get-json'),
+    path('get-config/', views.get_config, name='get-config'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

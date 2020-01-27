@@ -9,11 +9,13 @@ import MySQLdb as sql
 import pandas as pd
 import json
 import matplotlib.pyplot as plt
+import markdown as mkd
 import random
 
 django.setup()
 
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from . import models, settings
 from concurrent.futures import ProcessPoolExecutor
 from nltk.tokenize import RegexpTokenizer
@@ -451,6 +453,7 @@ def auto_processing(request):
     return redirect('/')
 
 
+"""
 def visualisation(request):
     plt.rcParams['figure.figsize'] = [20, 20]
     plt.subplots_adjust(top=1, bottom=0, right=1, left=0, hspace=0, wspace=0)
@@ -520,3 +523,140 @@ def visualisation(request):
     plt.savefig(img_path)
 
     return render(request, 'visualisation.html', context)
+"""
+
+
+def visualisation(request):
+    content = []
+    courses = []
+
+    words = get_words_courses()
+    for word in words:
+        depends = []
+        for course in word['courses']:
+            course_name = course['name'] + ' (' + str(course['id']) + ')'
+            depends.append(course_name)
+            if course['id'] not in courses:
+                courses.append(course['id'])
+                content.append({
+                    'type': 'discipline',
+                    'name': course_name,
+                    'depends': []
+                })
+            content.append({
+                'type': 'keyword',
+                'name': word['word'],
+                'depends': depends
+            })
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'json', 'objects.json')
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(content))
+
+    context = {}
+
+    return render(request, 'visualisation.html', context)
+
+
+def get_depends_markdown(header, arr):
+    markdown = f'### {header}'
+    if len(arr) > 0:
+        markdown += '\n\n'
+        for name in arr:
+            markdown += '* {{' + name + '}}\n'
+        markdown += '\n'
+    else:
+        markdown += ' *(none)*\n\n'
+    return markdown
+
+
+def get_id_string(name):
+    return 'obj-' + re.sub(r'@[^a-z0-9]+@i', '-', name)
+
+
+def get_html_docs(data, errors, obj):
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'json', 'config.json')
+    with open(file_path, 'r', encoding='utf-8') as f:
+        config = json.loads(f.read())
+
+        name = obj['name'].replace('/', '_')
+        filename = os.path.join(settings.BASE_DIR, 'static', 'json', f'{name}.mkdn')
+
+        name = obj['name'].replace('_', '\_')
+        type = obj['type']
+        if type in config['types']:
+            type = config['types'][type]['long']
+
+        markdown = f'## {name} *{type}*\n\n'
+
+        if os.path.exists(filename):
+            markdown += '### Documentation\n\n'
+            with open(filename, 'r', encoding='utf-8') as f:
+                markdown += f.read()
+        else:
+            markdown += '<div class="alert alert-warning">No documentation for this object</div>'
+
+        if obj:
+            markdown += '\n\n'
+            markdown += get_depends_markdown('Depends on', obj['depends'])
+            markdown += get_depends_markdown('Depended on by', obj['dependedOnBy'])
+
+        arr = markdown.split('{{')
+        markdown = arr[0]
+        for i in range(1, len(arr)):
+            pieces = arr[i].split('}}', 2)
+            name = pieces[0]
+            id_string = get_id_string(name)
+            name_esc = name.replace('_', '\_')
+            _class = 'select-object'
+            if name not in data:
+                _class = ' missing'
+                errors.append('Object "{0}" links to unrecognized object "{1}"'.format(obj['name'], name))
+            markdown += f'<a href="#{id_string}" class="{_class}" data-name="{name}">{name_esc}</a>'
+            markdown += pieces[1]
+
+    html = mkd.markdown(markdown)
+    html = html.replace('<pre><code>', '<pre>')
+    html = html.replace('</code></pre>', '</pre>')
+    return html
+
+
+def create_json():
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'json', 'objects.json')
+    with open(file_path, 'r', encoding='utf-8') as f:
+        objects = json.loads(f.read())
+        data = {}
+        errors = []
+
+        for obj in objects:
+            data[obj['name']] = obj
+
+        for k, v in data.items():
+            v['dependedOnBy'] = []
+
+        for k, v in data.items():
+            for depend in v['depends']:
+                if depend in data:
+                    data[depend]['dependedOnBy'].append(v['name'])
+                else:
+                    errors.append('Unrecognized dependency: "{0}" depends on "{1}"'.format(v['name'], depend))
+
+        for k, v in data.items():
+            v['docs'] = get_html_docs(data, errors, v)
+
+        res = {
+            'data': data,
+            'errors': errors
+        }
+        return res
+
+
+def get_json(request):
+    return JsonResponse(create_json())
+
+
+def get_config(request):
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'json', 'config.json')
+    with open(file_path, 'r', encoding='utf-8') as f:
+        config = json.loads(f.read())
+        config['jsonUrl'] = create_json()
+    return JsonResponse(config)

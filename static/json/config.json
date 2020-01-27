@@ -1,0 +1,45 @@
+{
+    "title" : "Database process documentation",
+    "graph" : {
+        "linkDistance" : 100,
+        "charge"       : -400,
+        "height"       : 1500,
+        "numColors"    : 2,
+        "labelPadding" : {
+            "left"   : 3,
+            "right"  : 3,
+            "top"    : 2,
+            "bottom" : 2
+        },
+        "labelMargin" : {
+            "left"   : 3,
+            "right"  : 3,
+            "top"    : 2,
+            "bottom" : 2
+        },
+        "ticksWithoutCollisions" : 50
+    },
+    "types" : {
+        "discipline"        : {
+            "short" : "Дисциплина",
+            "long"  : "Дисциплина"
+        },
+        "keyword"       : {
+            "short" : "Ключевое слово",
+            "long"  : "Ключевое слово"
+        }
+    },
+    "constraints" : [
+        {
+            "has"    : { "type" : "discipline" },
+            "type"   : "position",
+            "y"      : 0.1,
+            "weight" : 0.8
+        }, {
+            "has"    : { "type" : "keyword" },
+            "type"   : "position",
+            "y"      : 0.2,
+            "weight" : 0.8
+        }
+    ]
+}
