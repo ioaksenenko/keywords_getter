@@ -340,8 +340,8 @@ function drawGraph(config) {
         });
 
     graph.nodeRect = graph.node.append('rect')
-        .attr('rx', 5)
-        .attr('ry', 5)
+        .attr('rx', 100)
+        .attr('ry', 100)
         .attr('stroke', function(d) {
             return graph.strokeColor(d.categoryKey);
         })
@@ -357,6 +357,11 @@ function drawGraph(config) {
             lines = wrap(d.name),
             ddy   = 1.1,
             dy    = -ddy * lines.length / 2 + .5;
+
+        if (d.type === 'keyword') {
+            rect.attr('rx', 0);
+            rect.attr('rx', 0);
+        }
 
         lines.forEach(function(line) {
             var text = node.append('text')
