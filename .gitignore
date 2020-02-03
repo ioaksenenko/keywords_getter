@@ -124,4 +124,5 @@ dmypy.json
 .pyre/
 
 media/
-content_quality_analytics/migrations/
+keywords_getter/migrations/
+static/json/objects.json
