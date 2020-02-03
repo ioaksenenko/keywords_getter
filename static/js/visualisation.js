@@ -1,3 +1,8 @@
+var graph       = {},
+    selected    = {},
+    highlighted = null,
+    isIE        = false;
+
 $(document).ready(function () {
     let csrftoken = Cookies.get('csrftoken');
     $.ajaxSetup({
@@ -24,11 +29,6 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-var graph       = {},
-    selected    = {},
-    highlighted = null,
-    isIE        = false;
-
 function prepare(config) {
     resize();
 
@@ -46,11 +46,6 @@ function prepare(config) {
 
         graph.data = data.data;
         drawGraph(config);
-    });
-
-    $('#docs-close').on('click', function() {
-        deselectObject();
-        return false;
     });
 
     $(document).on('click', '.select-object', function() {
@@ -173,6 +168,9 @@ function drawGraph(config) {
     graph.svg = d3.select('#graph').append('svg')
         .attr('width' , graph.width  + graph.margin.left + graph.margin.right)
         .attr('height', graph.height + graph.margin.top  + graph.margin.bottom)
+        .call(d3.behavior.zoom().on("zoom", function () {
+            graph.svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        }))
       .append('g')
         .attr('transform', 'translate(' + graph.margin.left + ',' + graph.margin.top + ')');
 
@@ -592,8 +590,6 @@ function selectObject(obj, el) {
     highlightObject(obj);
 
     node.classed('selected', true);
-    $('#docs').html(obj.docs);
-    $('#docs-container').scrollTop(0);
     resize(true);
 
     var $graph   = $('#graph-container'),
@@ -652,32 +648,10 @@ function highlightObject(obj) {
     }
 }
 
-var showingDocs       = false,
-    docsClosePadding  = 8,
-    desiredDocsHeight = 300;
+function resize() {
+    var graphHeight = 0,
+        $graph      = $('#graph-container');
 
-function resize(showDocs) {
-    var docsHeight  = 0,
-        graphHeight = 0,
-        $docs       = $('#docs-container'),
-        $graph      = $('#graph-container'),
-        $close      = $('#docs-close');
-
-    if (typeof showDocs == 'boolean') {
-        showingDocs = showDocs;
-        $docs[showDocs ? 'show' : 'hide']();
-    }
-
-    if (showingDocs) {
-        docsHeight = desiredDocsHeight;
-        $docs.css('height', docsHeight + 'px');
-    }
-
-    graphHeight = window.innerHeight - docsHeight;
+    graphHeight = window.innerHeight;
     $graph.css('height', graphHeight + 'px');
-
-    $close.css({
-        top   : graphHeight + docsClosePadding + 'px',
-        right : window.innerWidth - $docs[0].clientWidth + docsClosePadding + 'px'
-    });
 }

@@ -534,7 +534,7 @@ def visualisation(request):
     for word in words:
         depends = []
         for course in word['courses']:
-            course_name = course['name'] + '(' + course['sdo'] + ', ' + str(course['id']) + ')'
+            course_name = course['name'] + ' (' + course['sdo'] + ', ' + str(course['id']) + ')'
             depends.append(course_name)
             if course['id'] not in courses:
                 courses.append(course['id'])

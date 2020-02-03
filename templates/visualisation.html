@@ -7,18 +7,10 @@
     <script src="{% static "js/visualisation.js" %}"></script>
 {% endblock %}
 {% block main %}
-    <div class="container-fluid mt-3 mb-3">
+    <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="col">
-                <div id="split-container">
-                    <div id="graph-container">
-                        <div id="graph"></div>
-                    </div>
-                    <div id="docs-container">
-                        <a id="docs-close" href="#">&times;</a>
-                        <div id="docs" class="docs"></div>
-                    </div>
-                </div>
+            <div class="col" id="graph-container">
+                <div class="w-100 h-100" id="graph"></div>
             </div>
         </div>
     </div>
