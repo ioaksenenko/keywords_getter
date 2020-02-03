@@ -536,8 +536,8 @@ def visualisation(request):
         for course in word['courses']:
             course_name = course['name'] + ' (' + course['sdo'] + ', ' + str(course['id']) + ')'
             depends.append(course_name)
-            if course['id'] not in courses:
-                courses.append(course['id'])
+            if course['sdo'] + str(course['id']) not in courses:
+                courses.append(course['sdo'] + str(course['id']))
                 content.append({
                     'type': 'discipline',
                     'name': course_name,
