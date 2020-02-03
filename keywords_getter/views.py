@@ -534,7 +534,7 @@ def visualisation(request):
     for word in words:
         depends = []
         for course in word['courses']:
-            course_name = course['name'] + ' (' + str(course['id']) + ')'
+            course_name = course['name'] + '(' + course['sdo'] + ', ' + str(course['id']) + ')'
             depends.append(course_name)
             if course['id'] not in courses:
                 courses.append(course['id'])
@@ -550,7 +550,7 @@ def visualisation(request):
             })
     file_path = os.path.join(settings.BASE_DIR, 'static', 'json', 'objects.json')
     with open(file_path, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(content))
+        f.write(json.dumps(content, ensure_ascii=False))
 
     context = {}
 
