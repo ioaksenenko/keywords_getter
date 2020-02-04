@@ -4,18 +4,18 @@ var graph       = {},
     isIE        = false;
 
 $(document).ready(function () {
-    let csrftoken = Cookies.get('csrftoken');
+    /*let csrftoken = Cookies.get('csrftoken');
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
         }
-    });
+    });*/
 
     $.ajax({
         dataType: "json",
-        method: "POST",
+        method: "GET",
         url: "/get-config/",
         data: {}
     }).done(function (response) {
