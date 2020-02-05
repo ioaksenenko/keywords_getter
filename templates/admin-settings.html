@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/admin-settings.css" %}" />
+    <script src="{% static "js/admin-settings.js" %}"></script>
+{% endblock %}
+{% block main %}
+    <form action="{% url 'exclude-words' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="container-fluid mt-3 mb-3">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="check-all" {% if not keywords|is_all_exclude %}checked{% endif %}>
+                                    <label class="custom-control-label" for="check-all"></label>
+                                </div>
+                            </th>
+                            <th scope="col">Ключевое слово</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for keyword in keywords %}
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="keywords" value="{{ keyword.word }}" id="keyword-{{ keyword.id }}" {% if not keyword.exclude %}checked{% endif %}>
+                                        <label class="custom-control-label" for="keyword-{{ keyword.id }}"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    {{ keyword.word }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary" id="apply">Применить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -16,3 +16,14 @@ class Course(models.Model):
             'sdo': self.sdo,
             'keywords': self.keywords,
         })
+
+
+class Keyword(models.Model):
+    word = models.CharField(max_length=255, default='')
+    exclude = models.BooleanField(default=False)
+
+    def __str__(self):
+        return json.dumps({
+            'word': self.word,
+            'exclude': self.exclude
+        })

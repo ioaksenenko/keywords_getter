@@ -4,15 +4,20 @@ var graph       = {},
     isIE        = false;
 
 $(document).ready(function () {
-    /*let csrftoken = Cookies.get('csrftoken');
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });*/
-
+    /*var sampleData = [{x:100, y:100}, {x:200, y:200}, {x:300, y:300}];
+    d3.select("body").append('svg')
+    .attr("width", 350).attr("height", 350)
+    .selectAll("circle")
+    .data(sampleData)
+    .enter().append('circle')
+    .attr('r', 4)
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .transition()
+    .delay(function(d, i) { return i*500; })
+    .duration(1000)
+    .attr('cx', function(d) {return d.x;})
+    .attr('cy', function(d) {return d.y;});*/
     $.ajax({
         dataType: "json",
         method: "GET",
@@ -25,10 +30,6 @@ $(document).ready(function () {
     });
 });
 
-function csrfSafeMethod(method) {
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
 function prepare(config) {
     resize();
 
@@ -40,7 +41,7 @@ function prepare(config) {
 
     d3.json("/get-json/", function(data) {
         if (data.errors.length) {
-            alert('Data error(s):\n\n' + data.errors.join('\n'));
+            console.log('Data error(s):\n\n' + data.errors.join('\n'));
             return;
         }
 
@@ -60,7 +61,8 @@ function prepare(config) {
 }
 
 function drawGraph(config) {
-    $('#graph').empty();
+    let graph_container = $('#graph');
+    graph_container.empty();
 
     graph.margin = {
         top    : 20,
@@ -69,13 +71,13 @@ function drawGraph(config) {
         left   : 20
     };
 
-    var display = $('#graph').css('display');
-    $('#graph')
+    var display = graph_container.css('display');
+    graph_container
         .css('display', 'block')
         .css('height', config.graph.height + 'px');
-    graph.width  = $('#graph').width()  - graph.margin.left - graph.margin.right;
-    graph.height = $('#graph').height() - graph.margin.top  - graph.margin.bottom;
-    $('#graph').css('display', display);
+    graph.width  = graph_container.width()  - graph.margin.left - graph.margin.right;
+    graph.height = graph_container.height() - graph.margin.top  - graph.margin.bottom;
+    graph_container.css('display', display);
 
     for (var name in graph.data) {
         var obj = graph.data[name];
@@ -174,7 +176,7 @@ function drawGraph(config) {
       .append('g')
         .attr('transform', 'translate(' + graph.margin.left + ',' + graph.margin.top + ')');
 
-    graph.svg.append('defs').selectAll('marker')
+    /*graph.svg.append('defs').selectAll('marker')
         .data(['end'])
       .enter().append('marker')
         .attr('id'          , String)
@@ -185,12 +187,12 @@ function drawGraph(config) {
         .attr('markerHeight', 6)
         .attr('orient'      , 'auto')
       .append('path')
-        .attr('d', 'M0,-5L10,0L0,5');
+        .attr('d', 'M0,-5L10,0L0,5');*/
 
     // adapted from http://stackoverflow.com/questions/9630008
     // and http://stackoverflow.com/questions/17883655
 
-    var glow = graph.svg.append('filter')
+    /*var glow = graph.svg.append('filter')
         .attr('x'     , '-50%')
         .attr('y'     , '-50%')
         .attr('width' , '200%')
@@ -211,7 +213,7 @@ function drawGraph(config) {
     glow.append('feMerge').selectAll('feMergeNode')
         .data(['coloredBlur', 'SourceGraphic'])
       .enter().append('feMergeNode')
-        .attr('in', String);
+        .attr('in', String);*/
 
     graph.legend = graph.svg.append('g')
         .attr('class', 'legend')
@@ -266,7 +268,7 @@ function drawGraph(config) {
       .enter().append('line')
         .attr('class', 'link');
 
-    graph.draggedThreshold = d3.scale.linear()
+    /*graph.draggedThreshold = d3.scale.linear()
         .domain([0, 0.1])
         .range([5, 20])
         .clamp(true);
@@ -303,19 +305,19 @@ function drawGraph(config) {
                 selectObject(d, this);
             }
             d.fixed &= ~6;
-        });
+        });*/
 
-    $('#graph-container').on('click', function(e) {
+    /*$('#graph-container').on('click', function(e) {
         if (!$(e.target).closest('.node').length) {
             deselectObject();
         }
-    });
+    });*/
 
     graph.node = graph.svg.selectAll('.node')
         .data(graph.force.nodes())
       .enter().append('g')
         .attr('class', 'node')
-        .call(graph.drag)
+        //.call(graph.drag)
         .on('mouseover', function(d) {
             if (!selected.obj) {
                 if (graph.mouseoutTimeout) {
@@ -557,6 +559,7 @@ function tick(e) {
                 .attr('y2', y);
         });
 
+
     graph.node
         .attr('transform', function(d) {
             return 'translate(' + d.x + ',' + d.y + ')';
@@ -564,7 +567,7 @@ function tick(e) {
 }
 
 function selectObject(obj, el) {
-    var node;
+    /*var node;
     if (el) {
         node = d3.select(el);
     } else {
@@ -614,16 +617,16 @@ function selectObject(obj, el) {
             scrollLeft : nodeRect.left + nodeRect.width  / 2 - graphRect.width  / 2,
             scrollTop  : nodeRect.top  + nodeRect.height / 2 - graphRect.height / 2
         }, 500);
-    }
+    }*/
 }
 
 function deselectObject(doResize) {
-    if (doResize || typeof doResize == 'undefined') {
+    /*if (doResize || typeof doResize == 'undefined') {
         resize(false);
     }
     graph.node.classed('selected', false);
     selected = {};
-    highlightObject(null);
+    highlightObject(null);*/
 }
 
 function highlightObject(obj) {

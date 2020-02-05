@@ -38,6 +38,13 @@ def index(request):
     if os.path.exists(media_path):
         shutil.rmtree(media_path)
     os.mkdir(media_path)
+
+    courses = models.Course.objects.all()
+    for course in courses:
+        for keyword in json.loads(course.keywords):
+            if not models.Keyword.objects.filter(word=keyword['word']).exists():
+                models.Keyword(word=keyword['word']).save()
+
     return render(request, 'index.html', context)
 
 
@@ -54,9 +61,15 @@ def get_keywords(request):
             name = get_course_name(sdo, cid_list[i])
             courses = models.Course.objects.all()
             course_exist = False
+
+            keywords = phr[:5] + kws[:5]
+            for keyword in keywords:
+                if not models.Keyword.objects.filter(word=keyword['word']).exists():
+                    models.Keyword(word=keyword['word']).save()
+
             for course in courses:
                 if course.cid == cid_list[i] and course.sdo == sdo:
-                    course.keywords = json.dumps(phr[:5] + kws[:5])
+                    course.keywords = json.dumps(keywords)
                     course.save()
                     course_exist = True
                     break
@@ -65,7 +78,7 @@ def get_keywords(request):
                     cid=cid_list[i],
                     name=name,
                     sdo=sdo,
-                    keywords=json.dumps(phr[:5] + kws[:5])
+                    keywords=json.dumps(keywords)
                 ).save()
         # shutil.rmtree(media_path)
     return redirect('/')
@@ -276,7 +289,7 @@ def calculate_phrases_frequencies(phrases):
 
 
 def get_course_name(sdo, cid):
-    #return 'Неизвестный курс'
+    # return 'Неизвестный курс'
     if sdo == 'online':
         connection = sql.connect(
             host='172.16.8.31',
@@ -326,9 +339,9 @@ def word_courses(request):
     return render(request, 'word-courses.html', context)
 
 
-def get_words_courses():
+def get_words_courses(filter_cond=None):
     res = []
-    courses = models.Course.objects.all()
+    courses = models.Course.objects.all() if filter_cond is None else models.Course.objects.filter(**filter_cond)
     for course in courses:
         words = json.loads(course.keywords)
         for word in words:
@@ -353,7 +366,8 @@ def get_words_courses():
                         'frequency': word['frequency']
                     }]
                 })
-    res = list(filter(lambda word: len(word['courses']) != 1, res))
+    res = [word for word in res if len(word['courses']) != 1 and
+           not models.Keyword.objects.filter(word=word['word'])[0].exclude]
     return res
 
 
@@ -432,12 +446,18 @@ def auto_processing(request):
         for i in range(len(cid_list)):
             kws = calculate_words_frequencies(words_groups[i])
             phr = calculate_phrases_frequencies(phrases_groups[i])
+
+            keywords = phr[:5] + kws[:5]
+            for keyword in keywords:
+                if not models.Keyword.objects.filter(word=keyword['word']).exists():
+                    models.Keyword(word=keyword['word']).save()
+
             name = df_course['fullname'].item()
             courses = models.Course.objects.all()
             course_exist = False
             for course in courses:
                 if course.cid == cid_list[i] and course.sdo == sdo:
-                    course.keywords = json.dumps(phr[:5] + kws[:5])
+                    course.keywords = json.dumps(keywords)
                     course.save()
                     course_exist = True
                     break
@@ -446,7 +466,7 @@ def auto_processing(request):
                     cid=cid_list[i],
                     name=name,
                     sdo=sdo,
-                    keywords=json.dumps(phr[:5] + kws[:5])
+                    keywords=json.dumps(keywords)
                 ).save()
         shutil.rmtree(os.path.join(media_path, str(df_course['id'].item())))
     shutil.rmtree(media_path)
@@ -530,7 +550,8 @@ def visualisation(request):
     content = []
     courses = []
 
-    words = get_words_courses()
+    words = get_words_courses({'sdo': 'new-online'})
+    # words = get_words_courses()
     for word in words:
         depends = []
         for course in word['courses']:
@@ -660,3 +681,19 @@ def get_config(request):
         config = json.loads(f.read())
         config['jsonUrl'] = create_json()
     return JsonResponse(config)
+
+
+def admin_settings(request):
+    context = {
+        'keywords': models.Keyword.objects.all()
+    }
+    return render(request, 'admin-settings.html', context)
+
+
+def exclude_words(request):
+    if request.method == 'POST':
+        keywords = request.POST.getlist('keywords')
+        for keyword in models.Keyword.objects.all():
+            keyword.exclude = keyword.word not in keywords
+            keyword.save()
+    return redirect('/admin-settings/')

@@ -29,6 +29,8 @@ urlpatterns = [
     path('visualisation/', views.visualisation, name='visualisation'),
     path('get-json/', views.get_json, name='get-json'),
     path('get-config/', views.get_config, name='get-config'),
+    path('admin-settings/', views.admin_settings, name='admin-settings'),
+    path('exclude-words/', views.exclude_words, name='exclude-words'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
