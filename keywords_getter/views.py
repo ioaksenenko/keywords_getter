@@ -34,7 +34,7 @@ def index(request):
     # print(res)
 
     context = {
-        'courses': models.Course.objects.all()
+        'courses': models.Course.objects.filter(sdo='new-online')
     }
     request.session.create()
     if not os.path.exists(settings.MEDIA_ROOT):
@@ -341,8 +341,11 @@ def get_course_name(sdo, cid):
 
 
 def word_courses(request):
+    words = get_words_courses({'sdo': 'new-online'})
+    if len(words) == 0:
+        words = get_words_courses()
     context = {
-        'words': get_words_courses()
+        'words': words
     }
     return render(request, 'word-courses.html', context)
 
@@ -443,7 +446,7 @@ def get_courses(sdo):
 
 
 def auto_processing(request):
-    sdo = 'online'
+    sdo = 'new-online'
     df_courses = get_courses(sdo)
     media_path = os.path.join(settings.MEDIA_ROOT, request.session.session_key)
     for idx in df_courses.index:
