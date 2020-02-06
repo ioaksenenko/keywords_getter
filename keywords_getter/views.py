@@ -29,6 +29,10 @@ from natsort import natsorted
 
 
 def index(request):
+    # morph_analyzer = pymorphy2.MorphAnalyzer()
+    # res = morph_analyzer.parse('приёмника')
+    # print(res)
+
     context = {
         'courses': models.Course.objects.all()
     }
@@ -195,8 +199,9 @@ def get_words_from_file(term_extractor, morph_analyzer, inflector, file_path):
 
 
 def get_tokens(txt):
-    tokenizer = RegexpTokenizer(r'[a-zA-Zа-яА-Я-]+')
-    res = list(map(lambda x: x.lower(), tokenizer.tokenize(txt)))
+    # tokenizer = RegexpTokenizer(r'[a-zA-Zа-яА-Я-]+')
+    # res = list(map(lambda x: x.lower(), tokenizer.tokenize(txt)))
+    res = re.split(r'\s+', txt)
     return res
 
 
@@ -290,46 +295,48 @@ def calculate_phrases_frequencies(phrases):
 
 
 def get_course_name(sdo, cid):
-    # return 'Неизвестный курс'
-    if sdo == 'online':
-        connection = sql.connect(
-            host='172.16.8.31',
-            port=3306,
-            user='aio',
-            passwd='acw-6l8q',
-            db='online',
-            charset='utf8',
-            init_command='SET NAMES UTF8'
-        )
-    elif sdo == 'new-online':
-        connection = sql.connect(
-            host='172.16.9.53',
-            port=3306,
-            user='aio',
-            passwd='acw-6l8q',
-            db='moodle_online',
-            charset='utf8',
-            init_command='SET NAMES UTF8'
-        )
-    else:
-        connection = None
+    try:
+        if sdo == 'online':
+            connection = sql.connect(
+                host='172.16.8.31',
+                port=3306,
+                user='aio',
+                passwd='acw-6l8q',
+                db='online',
+                charset='utf8',
+                init_command='SET NAMES UTF8'
+            )
+        elif sdo == 'new-online':
+            connection = sql.connect(
+                host='172.16.9.53',
+                port=3306,
+                user='aio',
+                passwd='acw-6l8q',
+                db='moodle_online',
+                charset='utf8',
+                init_command='SET NAMES UTF8'
+            )
+        else:
+            connection = None
 
-    if connection is not None:
-        df = pd.read_sql(
-            """
-                SELECT
-                    c.fullname
-                FROM
-                    mdl_course AS c
-                WHERE
-                    c.id = %s
-            """,
-            connection,
-            params=[cid]
-        )
-        res = df['fullname'].item()
-    else:
-        res = 'Неизвестный курс'
+        if connection is not None:
+            df = pd.read_sql(
+                """
+                    SELECT
+                        c.fullname
+                    FROM
+                        mdl_course AS c
+                    WHERE
+                        c.id = %s
+                """,
+                connection,
+                params=[cid]
+            )
+            res = df['fullname'].item()
+        else:
+            res = 'Неизвестный курс'
+    except Exception:
+        return 'Неизвестный курс'
     return res
 
 
@@ -552,7 +559,8 @@ def visualisation(request):
     courses = []
 
     words = get_words_courses({'sdo': 'new-online'})
-    # words = get_words_courses()
+    if len(words) == 0:
+        words = get_words_courses()
     courses_number = 0
     keywords_number = 0
     for word in words:
