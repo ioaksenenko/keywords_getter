@@ -25,6 +25,7 @@ from functools import reduce
 from pyphrasy.inflect import PhraseInflector
 from matplotlib.patches import BoxStyle
 from matplotlib import cm
+from natsort import natsorted
 
 
 def index(request):
@@ -692,7 +693,7 @@ def get_config(request):
 
 def admin_settings(request):
     context = {
-        'keywords': sorted(models.Keyword.objects.all(), key=lambda x: x.word)
+        'keywords': natsorted(models.Keyword.objects.all(), key=lambda x: x.word)
     }
     return render(request, 'admin-settings.html', context)
 
