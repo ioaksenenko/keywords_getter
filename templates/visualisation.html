@@ -6,11 +6,36 @@
 	<link rel="stylesheet" type="text/css" href="{% static "css/visualisation.css" %}" />
     <script src="{% static "js/visualisation.js" %}"></script>
 {% endblock %}
+{% block header %}
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <a href="{% url 'admin-settings' %}" target="_blank"><h2><i class="fas fa-sliders-h"></i></h2></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block main %}
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col" id="graph-container">
                 <div class="w-100 h-100" id="graph"></div>
+            </div>
+        </div>
+        <div class="row align-items-center courses-number">
+            <div class="col-1">
+                <p>{{ courses_number }}</p>
+            </div>
+            <div class="col-auto">
+                <p>Дисциплин</p>
+            </div>
+        </div>
+        <div class="row align-items-center keywords-number">
+            <div class="col-1">
+                <p>{{ keywords_number }}</p>
+            </div>
+            <div class="col-auto">
+                <p>Ключевых слов</p>
             </div>
         </div>
     </div>

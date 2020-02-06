@@ -550,8 +550,10 @@ def visualisation(request):
     content = []
     courses = []
 
-    words = get_words_courses({'sdo': 'new-online'})
-    # words = get_words_courses()
+    # words = get_words_courses({'sdo': 'new-online'})
+    words = get_words_courses()
+    courses_number = 0
+    keywords_number = 0
     for word in words:
         depends = []
         for course in word['courses']:
@@ -564,16 +566,21 @@ def visualisation(request):
                     'name': course_name,
                     'depends': []
                 })
+                courses_number += 1
             content.append({
                 'type': 'keyword',
                 'name': word['word'],
                 'depends': depends
             })
+        keywords_number += 1
     file_path = os.path.join(settings.BASE_DIR, 'static', 'json', 'objects.json')
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(json.dumps(content, ensure_ascii=False))
 
-    context = {}
+    context = {
+        'courses_number': courses_number,
+        'keywords_number': keywords_number
+    }
 
     return render(request, 'visualisation.html', context)
 
@@ -685,7 +692,7 @@ def get_config(request):
 
 def admin_settings(request):
     context = {
-        'keywords': models.Keyword.objects.all()
+        'keywords': sorted(models.Keyword.objects.all(), key=lambda x: x.word)
     }
     return render(request, 'admin-settings.html', context)
 

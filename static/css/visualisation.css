@@ -1,3 +1,14 @@
+.courses-number,
+.keywords-number {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    font-weight: bold;
+}
+.keywords-number {
+    top: 40px;
+}
+
 .link {
     fill: none;
     stroke: #666;
