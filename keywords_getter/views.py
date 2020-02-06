@@ -550,8 +550,8 @@ def visualisation(request):
     content = []
     courses = []
 
-    # words = get_words_courses({'sdo': 'new-online'})
-    words = get_words_courses()
+    words = get_words_courses({'sdo': 'new-online'})
+    # words = get_words_courses()
     courses_number = 0
     keywords_number = 0
     for word in words:
