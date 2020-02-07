@@ -11,6 +11,7 @@ import json
 import matplotlib.pyplot as plt
 import markdown as mkd
 import random
+import numpy as np
 
 django.setup()
 
@@ -62,16 +63,15 @@ def get_keywords(request):
         words_groups, phrases_groups = get_words_from_files(cid_list, media_path)
         for i in range(len(cid_list)):
             kws = calculate_words_frequencies(words_groups[i])
-            phr = calculate_phrases_frequencies(phrases_groups[i])
-            name = get_course_name(sdo, cid_list[i])
-            courses = models.Course.objects.all()
-            course_exist = False
-
+            phr = calculate_phrases_frequencies(words_groups[i], phrases_groups[i])
             keywords = phr[:5] + kws[:5]
             for keyword in keywords:
                 if not models.Keyword.objects.filter(word=keyword['word']).exists():
                     models.Keyword(word=keyword['word']).save()
 
+            name = get_course_name(sdo, cid_list[i])
+            courses = models.Course.objects.all()
+            course_exist = False
             for course in courses:
                 if course.cid == cid_list[i] and course.sdo == sdo:
                     course.keywords = json.dumps(keywords)
@@ -164,6 +164,12 @@ def get_words_from_files(cid_list, media_path):
                     futures.append(executor.submit(get_words_from_file, term_extractor, morph_analyzer, inflector, file_path))
         futures_groups.append(futures)
 
+    """
+    words_num = 0
+    pages_num = 1
+    phrases_stat = {}
+    """
+
     words_groups = []
     phrases_groups = []
     for futures in futures_groups:
@@ -172,6 +178,21 @@ def get_words_from_files(cid_list, media_path):
         text = ''
         for future in futures:
             w, p = future.result()
+
+            """
+            words_num += len(w)
+            pages = words_num // 500
+            if pages > 0:
+                pages_num += pages
+                phrases_stat = {k: v + [0 for _ in range(pages)] for k, v in phrases_stat.items()}
+            
+            for phrase in p:
+                if phrase[0] not in phrases_stat:
+                    phrases_stat[phrase[0]] = [0 for _ in range(pages_num)]
+                for i in range(1, pages + 1):
+                    phrases_stat[phrase[0]][-i] += phrase[1] / pages
+            """
+
             # w, txt = future.result()
             words += w
             # text += txt
@@ -252,17 +273,27 @@ def remove_stopwords(words):
 
 def calculate_words_frequencies(words):
     res = []
-    uniq_words = list(set(words))
+    uniq_words = set(words)
+
+    word_numbers = {word: [0] for word in uniq_words}
+    for j in range(len(words)):
+        if j and j % 500 == 0:
+            word_numbers[words[j]].append(0)
+        word_numbers[words[j]][-1] += 1
+    word_fields = {k: [np.sum(v), np.mean(v)] for k, v in word_numbers.items()}
+
     for word in uniq_words:
         res.append({
             'word': word,
-            'frequency': round(words.count(word) * 100 / len(words), 2)
+            'frequency': round(word_fields[word][0] * 100 / len(words), 2),
+            'average': word_fields[word][1],
+            'words_num': len(words)
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
     return res
 
 
-def calculate_phrases_frequencies(phrases):
+def calculate_phrases_frequencies(words, phrases):
     res = []
     #"""
     n = 0
@@ -275,10 +306,15 @@ def calculate_phrases_frequencies(phrases):
                 count += phrase[1]
         uniq_phrases.append((term, count))
         n += count
+
+    pages_num = round(len(words) / 500)
+
     for phrase in uniq_phrases:
         res.append({
             'word': phrase[0],
-            'frequency': round(phrase[1] * 100 / n, 2)
+            'frequency': round(phrase[1] * 100 / n, 2),
+            'average': phrase[1] / pages_num,
+            'words_num': len(words)
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
     #"""
@@ -341,11 +377,8 @@ def get_course_name(sdo, cid):
 
 
 def word_courses(request):
-    words = get_words_courses({'sdo': 'new-online'})
-    if len(words) == 0:
-        words = get_words_courses()
     context = {
-        'words': words
+        'words': get_words_courses({'sdo': 'new-online'})
     }
     return render(request, 'word-courses.html', context)
 
@@ -562,8 +595,6 @@ def visualisation(request):
     courses = []
 
     words = get_words_courses({'sdo': 'new-online'})
-    if len(words) == 0:
-        words = get_words_courses()
     courses_number = 0
     keywords_number = 0
     for word in words:

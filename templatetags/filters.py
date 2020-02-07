@@ -17,3 +17,8 @@ def is_all_exclude(keywords):
         if not keyword.exclude:
             return False
     return True
+
+
+@register.filter
+def div(lhs, rhs):
+    return lhs / rhs

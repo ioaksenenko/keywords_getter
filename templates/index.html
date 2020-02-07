@@ -7,10 +7,9 @@
     <script src="{% static "js/index.js" %}"></script>
 {% endblock %}
 {% block main %}
-    SDFSDF
     <form action="{% url 'get-keywords' %}" enctype="multipart/form-data" method="post" id="index-form">
         {% csrf_token %}
-        <div class="container-fluid mt-3 mb-3">
+        <div class="container-fluid mb-3">
             <div class="row align-items-center">
                 <div class="col-auto">
                     <div class="form-check form-check-inline">
@@ -45,24 +44,32 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">СДО</th>
+                                    <th scope="col">№</th>
                                     <th scope="col">Название курса</th>
+                                    <th scope="col">СДО</th>
                                     <th scope="col">Идентификатор курса</th>
+                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="Объем текстового содержания курса (количество слов)">Объем</th>
                                     <th scope="col">Ключевые слова</th>
-                                    <th scope="col">Частоты слов, %</th>
+                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="Среднее количество вхождений на 500 слов (~A4)">N/500</th>
+                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="Процент вхождений слова/фразы на весь объем текста">Частоты слов, %</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for course in courses %}
-                                    {% for keyword in course.keywords|from_json %}
-                                        <tr class="{% if forloop.counter != 1 %}borderless{% endif %}">
-                                            <td class="align-middle">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a>{% endif %}</td>
-                                            <td class="align-middle">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.name }}</a>{% endif %}</td>
-                                            <td class="align-middle">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.cid }}</a>{% endif %}</td>
-                                            <td class="align-middle">{{ keyword.word }}</td>
-                                            <td class="align-middle">{{ keyword.frequency }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                    {% with out_counter=forloop.counter keywords=course.keywords|from_json %}
+                                        {% for keyword in keywords %}
+                                            <tr class="{% if forloop.counter != 1 and forloop.counter != keywords|length|div:2|add:1 %}borderless{% endif %}">
+                                                <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}{{ out_counter }}{% endif %}</td>
+                                                <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.name }}</a>{% endif %}</td>
+                                                <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a>{% endif %}</td>
+                                                <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.cid }}</a>{% endif %}</td>
+                                                <td class="align-middle">{% if forloop.counter == 1 %}{{ keyword.words_num }}{% endif %}</td>
+                                                <td class="align-middle">{{ keyword.word }}</td>
+                                                <td class="align-middle">{{ keyword.average }}</td>
+                                                <td class="align-middle">{{ keyword.frequency }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endwith %}
                                 {% endfor %}
                             </tbody>
                         </table>

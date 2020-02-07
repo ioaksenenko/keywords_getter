@@ -13,6 +13,7 @@
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
+                            <th scope="col">№</th>
                             <th scope="col">Слово</th>
                             <th scope="col">Название курса</th>
                             <th scope="col">СДО</th>
@@ -22,15 +23,18 @@
                     </thead>
                     <tbody>
                         {% for word in words %}
-                            {% for course in word.courses %}
-                                <tr class="{% if forloop.counter != 1 %}borderless{% endif %}">
-                                    <td class="align-middle">{% if forloop.counter == 1 %}{{ word.word }}{% endif %}</td>
-                                    <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.name }}</a></td>
-                                    <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a></td>
-                                    <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.id }}</a></td>
-                                    <td class="align-middle">{{ course.frequency }}</td>
-                                </tr>
-                            {% endfor %}
+                            {% with out_counter=forloop.counter %}
+                                {% for course in word.courses %}
+                                    <tr class="{% if forloop.counter != 1 %}borderless{% endif %}">
+                                        <td class="align-middle">{% if forloop.counter == 1 %}{{ out_counter }}{% endif %}</td>
+                                        <td class="align-middle">{% if forloop.counter == 1 %}{{ word.word }}{% endif %}</td>
+                                        <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.name }}</a></td>
+                                        <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a></td>
+                                        <td class="align-middle"><a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.id|stringformat:'d' }}" target="_blank">{{ course.id }}</a></td>
+                                        <td class="align-middle">{{ course.frequency }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
                         {% endfor %}
                     </tbody>
                 </table>
