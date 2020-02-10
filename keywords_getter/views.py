@@ -489,7 +489,7 @@ def auto_processing(request):
         words_groups, phrases_groups = get_words_from_files(cid_list, media_path)
         for i in range(len(cid_list)):
             kws = calculate_words_frequencies(words_groups[i])
-            phr = calculate_phrases_frequencies(phrases_groups[i])
+            phr = calculate_phrases_frequencies(words_groups[i], phrases_groups[i])
 
             keywords = phr[:5] + kws[:5]
             for keyword in keywords:
