@@ -70,7 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -169,7 +169,7 @@
       <workItem from="1580868569678" duration="23463000" />
       <workItem from="1580958672069" duration="18518000" />
       <workItem from="1581045318505" duration="4595000" />
-      <workItem from="1581301550281" duration="875000" />
+      <workItem from="1581301550281" duration="2198000" />
     </task>
     <servers />
   </component>

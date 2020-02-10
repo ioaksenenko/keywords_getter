@@ -308,6 +308,7 @@ def calculate_phrases_frequencies(words, phrases):
         n += count
 
     pages_num = round(len(words) / 500)
+    pages_num = pages_num or 1
 
     for phrase in uniq_phrases:
         res.append({
