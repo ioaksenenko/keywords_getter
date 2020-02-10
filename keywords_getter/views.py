@@ -286,7 +286,7 @@ def calculate_words_frequencies(words):
         res.append({
             'word': word,
             'frequency': round(word_fields[word][0] * 100 / len(words), 2),
-            'average': word_fields[word][1],
+            'average': round(word_fields[word][1], 2),
             'words_num': len(words)
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
@@ -313,7 +313,7 @@ def calculate_phrases_frequencies(words, phrases):
         res.append({
             'word': phrase[0],
             'frequency': round(phrase[1] * 100 / n, 2),
-            'average': phrase[1] / pages_num,
+            'average': round(phrase[1] / pages_num, 2),
             'words_num': len(words)
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
