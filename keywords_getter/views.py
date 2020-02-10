@@ -277,9 +277,10 @@ def calculate_words_frequencies(words):
 
     word_numbers = {word: [0] for word in uniq_words}
     for j in range(len(words)):
-        if j and j % 500 == 0:
+        if (j + 1) % 500 == 0:
             word_numbers[words[j]].append(0)
         word_numbers[words[j]][-1] += 1
+    print(word_numbers['дать'])
     word_fields = {k: [np.sum(v), np.mean(v)] for k, v in word_numbers.items()}
 
     for word in uniq_words:
