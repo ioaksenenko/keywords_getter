@@ -125,4 +125,4 @@ dmypy.json
 
 media/
 keywords_getter/migrations/
-.static/json/objects.json
+./static/json/objects.json
