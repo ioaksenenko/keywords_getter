@@ -479,6 +479,7 @@ def get_courses(sdo):
         return None
 
 
+"""
 def auto_processing(request):
     sdo = 'new-online'
     df_courses = get_courses(sdo)
@@ -515,6 +516,47 @@ def auto_processing(request):
                 ).save()
         shutil.rmtree(os.path.join(media_path, str(df_course['id'].item())))
     shutil.rmtree(media_path)
+    return redirect('/')
+"""
+
+
+def auto_processing(request):
+    if request.method == 'POST':
+        sdo = request.POST.get('sdo')
+        courses = request.POST.getlist('courses')
+        media_path = os.path.join(settings.MEDIA_ROOT, request.session.session_key)
+        for course in courses:
+            course = json.loads(course.replace('\'', '"'))
+            cid_list = [course['id']]
+            download_files(sdo, cid_list, media_path)
+            words_groups, phrases_groups = get_words_from_files(cid_list, media_path)
+            for i in range(len(cid_list)):
+                kws = calculate_words_frequencies(words_groups[i])
+                phr = calculate_phrases_frequencies(words_groups[i], phrases_groups[i])
+
+                keywords = phr[:5] + kws[:5]
+                for keyword in keywords:
+                    if not models.Keyword.objects.filter(word=keyword['word']).exists():
+                        models.Keyword(word=keyword['word']).save()
+
+                name = course['fullname']
+                db_courses = models.Course.objects.all()
+                course_exist = False
+                for db_course in db_courses:
+                    if db_course.cid == cid_list[i] and db_course.sdo == sdo:
+                        db_course.keywords = json.dumps(keywords)
+                        db_course.save()
+                        course_exist = True
+                        break
+                if not course_exist:
+                    models.Course(
+                        cid=cid_list[i],
+                        name=name,
+                        sdo=sdo,
+                        keywords=json.dumps(keywords)
+                    ).save()
+            shutil.rmtree(os.path.join(media_path, str(course['id'])))
+        shutil.rmtree(media_path)
     return redirect('/')
 
 
@@ -748,3 +790,16 @@ def exclude_words(request):
             keyword.exclude = keyword.word not in keywords
             keyword.save()
     return redirect('/admin-settings/')
+
+
+def courses(request):
+    sdo = request.GET.get('sdo') or 'new-online'
+    df_courses = get_courses(sdo)
+    context = {
+        'sdo': sdo,
+        'courses': [{
+            'fullname': df_courses[df_courses.index == idx]['fullname'].item(),
+            'id': df_courses[df_courses.index == idx]['id'].item()
+        } for idx in df_courses.index]
+    }
+    return render(request, 'courses.html', context)

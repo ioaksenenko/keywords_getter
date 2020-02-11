@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/courses.css" %}" />
+    <script src="{% static "js/courses.js" %}"></script>
+{% endblock %}
+{% block main %}
+    <form action="{% url 'auto-processing' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="container-fluid mt-3 mb-3">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sdo" id="online" value="online" {% if sdo == 'online' %}checked{% endif %}>
+                        <label class="form-check-label" for="online"><a href="https://online.tusur.ru" target="_blank">online</a></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sdo" id="new-online" value="new-online" {% if sdo == 'new-online' %}checked{% endif %}>
+                        <label class="form-check-label" for="new-online"><a href="https://new-online.tusur.ru" target="_blank">new-online</a></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-auto">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">№</th>
+                                <th scope="col">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="check-all" checked>
+                                        <label class="custom-control-label" for="check-all"></label>
+                                    </div>
+                                </th>
+                                <th scope="col">Название курса</th>
+                                <th scope="col">Идентификатор курса</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                                <tr>
+                                    <td class="align-middle">{{ forloop.counter }}</td>
+                                    <td class="align-middle">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="courses" value="{{ course }}" id="course-{{ course.id }}" checked>
+                                            <label class="custom-control-label" for="course-{{ course.id }}"></label>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">{{ course.fullname }}</td>
+                                    <td class="align-middle">{{ course.id }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary" id="processing">Обработать</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

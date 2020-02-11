@@ -31,6 +31,7 @@ urlpatterns = [
     path('get-config/', views.get_config, name='get-config'),
     path('admin-settings/', views.admin_settings, name='admin-settings'),
     path('exclude-words/', views.exclude_words, name='exclude-words'),
+    path('courses/', views.courses, name='courses'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
