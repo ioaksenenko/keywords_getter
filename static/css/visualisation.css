@@ -1,3 +1,32 @@
+.tittle {
+    position: absolute;
+    top: 55px;
+    background-color: white;
+    z-index: 999;
+}
+
+.disciplines-number {
+    position: absolute;
+    top: 115px;
+    background-color: white;
+    z-index: 999;
+    width: 250px;
+}
+.disciplines-square {
+    color: #a6cee3;
+}
+
+.keywords-number {
+    position: absolute;
+    top: 135px;
+    background-color: white;
+    z-index: 999;
+    width: 250px;
+}
+.keywords-square {
+    color: #b2df8a;
+}
+
 .col-1 {
     max-width: 80px !important;
     width: 80px !important;

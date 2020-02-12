@@ -22,6 +22,9 @@ $(document).ready(function () {
     });
 
     check_all.change(select);
+
+    $('#admin-settings').parent().addClass('active');
+    remove_link();
 });
 
 

@@ -10,6 +10,11 @@
     <form action="{% url 'exclude-words' %}" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         <div class="container-fluid mt-3 mb-3">
+            <div class="row align-items-center mt-3 mb-3">
+                <div class="col">
+                    <h5>Настройка отображения ключевых слов на диаграмме</h5>
+                </div>
+            </div>
             <div class="row align-items-center">
                 <div class="col-auto">
                     <table class="table">

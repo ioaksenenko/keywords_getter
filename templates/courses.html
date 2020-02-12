@@ -10,6 +10,11 @@
     <form action="{% url 'auto-processing' %}" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         <div class="container-fluid mt-3 mb-3">
+            <div class="row align-items-center mt-3 mb-3">
+                <div class="col">
+                    <h5>Автообработка курсов</h5>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-auto">
                     <div class="form-check form-check-inline">

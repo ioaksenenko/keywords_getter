@@ -28,6 +28,9 @@ $(document).ready(function () {
     }).fail(function (response) {
         console.log(response);
     });
+
+    $('#visualisation').parent().addClass('active');
+    remove_link();
 });
 
 function prepare(config) {
@@ -215,7 +218,7 @@ function drawGraph(config) {
       .enter().append('feMergeNode')
         .attr('in', String);*/
 
-    graph.legend = graph.svg.append('g')
+    /*graph.legend = graph.svg.append('g')
         .attr('class', 'legend')
         .attr('x', 0)
         .attr('y', 0)
@@ -257,7 +260,7 @@ function drawGraph(config) {
         })
         .text(function(d) {
             return d.typeName + (d.group ? ': ' + d.group : '');
-        });
+        });*/
 
     $('#graph-container').on('scroll', function() {
         graph.legend.attr('transform', 'translate(0,' + $(this).scrollTop() + ')');

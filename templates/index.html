@@ -10,6 +10,11 @@
     <form action="{% url 'get-keywords' %}" enctype="multipart/form-data" method="post" id="index-form">
         {% csrf_token %}
         <div class="container-fluid mb-3">
+            <div class="row align-items-center mt-3">
+                <div class="col">
+                    <h5>Таблица курсов и ключевых слов</h5>
+                </div>
+            </div>
             <div class="row align-items-center">
                 <div class="col-auto">
                     <div class="form-check form-check-inline">
@@ -48,10 +53,10 @@
                                     <th scope="col">Название курса</th>
                                     <th scope="col">СДО</th>
                                     <th scope="col">Идентификатор курса</th>
-                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="Объем текстового содержания курса (количество слов)">Объем</th>
+                                    <th scope="col">Объем<i class="far fa-question-circle ml-1" data-toggle="tooltip" data-placement="top" title="Объем текстового содержания курса (количество слов)"></i></th>
                                     <th scope="col">Ключевые слова</th>
-                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="Среднее количество вхождений на 500 слов (~A4)">N/500</th>
-                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="Процент вхождений слова/фразы на весь объем текста">Частоты слов, %</th>
+                                    <th scope="col">N/500<i class="far fa-question-circle ml-1" data-toggle="tooltip" data-placement="top" title="Среднее количество вхождений на 500 слов (~A4)"></i></th>
+                                    <th scope="col">Частоты слов, %<i class="far fa-question-circle ml-1" data-toggle="tooltip" data-placement="top" title="Процент вхождений слова/фразы на весь объем текста"></i></th>
                                 </tr>
                             </thead>
                             <tbody>

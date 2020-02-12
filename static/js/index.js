@@ -28,4 +28,8 @@ $(document).ready(function () {
     } else {
         submit.prop('disabled', true);
     }
+
+
+    $('#courses-keywords').parent().addClass('active');
+    remove_link();
 });

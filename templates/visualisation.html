@@ -7,8 +7,16 @@
     <script src="{% static "js/visualisation.js" %}"></script>
 {% endblock %}
 {% block main %}
-    <div class="container-fluid mt-3">
-        <div class="row align-items-center">
+    <div class="container-fluid">
+        <div class="row align-items-center tittle pt-3 pb-3">
+            <div class="col-auto">
+                <h5>Визуализация таблицы ключевых слов и соответствующих им курсов</h5>
+            </div>
+        </div>
+        <div class="row align-items-center disciplines-number">
+            <div class="col-1">
+                <i class="fas fa-square ml-1 disciplines-square"></i>
+            </div>
             <div class="col-1">
                 <p class="text-center m-0 p-0">{{ courses_number }}</p>
             </div>
@@ -16,7 +24,10 @@
                 <p class="m-0 p-0">Дисциплин</p>
             </div>
         </div>
-        <div class="row align-items-center">
+        <div class="row align-items-center keywords-number">
+            <div class="col-1">
+                <i class="fas fa-square ml-1 keywords-square"></i>
+            </div>
             <div class="col-1">
                 <p class="text-center m-0 p-0">{{ keywords_number }}</p>
             </div>
