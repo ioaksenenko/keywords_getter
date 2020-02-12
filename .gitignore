@@ -1,3 +1,5 @@
+/static/json/objects.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -125,4 +127,3 @@ dmypy.json
 
 media/
 keywords_getter/migrations/
-.static/json/objects.json
