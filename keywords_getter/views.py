@@ -442,6 +442,16 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
     res = []
     terms = term_extractor(text)
     for term in terms:
+        origin_words = [word.get_word() for word in term.words]
+        origin_words_objects = [morph_analyzer.parse(word)[0] for word in origin_words]
+        exist_words_origin = []
+        for words_object in origin_words_objects:
+            if words_object.tag.POS is not None and len(words_object.methods_stack) == 1:
+                exist_words_origin.append(words_object)
+            else:
+                if words_object.word in origin_words:
+                    origin_words.remove(words_object.word)
+
         words = term.normalized.split()
         words_objects = [morph_analyzer.parse(word)[0] for word in words]
         exist_words = []
@@ -456,7 +466,7 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
             phrase = ' '.join(words)
             res.append((
                 {
-                    'original_phrase': ' '.join([word.get_word() for word in term.words]),
+                    'original_phrase': ' '.join([words_object.word for words_object in exist_words_origin]),
                     'norm_phrase': inflector.inflect(phrase, 'nomn')
                 },
                 term.count
