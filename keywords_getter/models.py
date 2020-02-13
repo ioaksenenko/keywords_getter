@@ -21,9 +21,11 @@ class Course(models.Model):
 class Keyword(models.Model):
     word = models.CharField(max_length=255, default='')
     exclude = models.BooleanField(default=False)
+    forms = models.CharField(max_length=255, default='')
 
     def __str__(self):
         return json.dumps({
             'word': self.word,
-            'exclude': self.exclude
+            'exclude': self.exclude,
+            'forms': self.forms
         })

@@ -45,11 +45,14 @@ def index(request):
         shutil.rmtree(media_path)
     os.mkdir(media_path)
 
+    # models.Keyword.objects.all().delete()
+    """
     courses = models.Course.objects.all()
     for course in courses:
         for keyword in json.loads(course.keywords):
             if not models.Keyword.objects.filter(word=keyword['word']).exists():
                 models.Keyword(word=keyword['word']).save()
+    """
 
     return render(request, 'index.html', context)
 
@@ -66,8 +69,16 @@ def get_keywords(request):
             phr = calculate_phrases_frequencies(words_groups[i], phrases_groups[i])
             keywords = phr[:5] + kws[:5]
             for keyword in keywords:
-                if not models.Keyword.objects.filter(word=keyword['word']).exists():
-                    models.Keyword(word=keyword['word']).save()
+                db_keywords = models.Keyword.objects.filter(word=keyword['word'])
+                if not db_keywords.exists():
+                    models.Keyword(
+                        word=keyword['word'],
+                        forms=json.dumps(keyword['word_forms'], ensure_ascii=False)
+                    ).save()
+                else:
+                    for db_keyword in db_keywords:
+                        db_keyword.forms = json.dumps(list(set(json.loads(db_keyword.forms) + keyword['word_forms'])), ensure_ascii=False)
+                        db_keyword.save()
 
             name = get_course_name(sdo, cid_list[i])
             courses = models.Course.objects.all()
@@ -261,25 +272,32 @@ def filter_by_part_of_speech(words):
 
 
 def get_norm_words(words):
-    res = [word.normal_form for word in words]
+    res = [{
+        'original_form': word.word,
+        'normal_form': word.normal_form
+    } for word in words]
     return res
 
 
 def remove_stopwords(words):
     sws = set(stopwords.words('russian') + stopwords.words('english'))
-    res = [word for word in words if word not in sws]
+    res = [word for word in words if word['normal_form'] not in sws]
     return res
 
 
 def calculate_words_frequencies(words):
     res = []
-    uniq_words = set(words)
+    uniq_words = set([word['normal_form'] for word in words])
+
+    word_forms = {word: set() for word in uniq_words}
+    for word in words:
+        word_forms[word['normal_form']].add(word['original_form'])
 
     word_numbers = {word: [0] for word in uniq_words}
     for j in range(len(words)):
         if (j + 1) % 500 == 0:
             word_numbers = {k: v + [0] for k, v in word_numbers.items()}
-        word_numbers[words[j]][-1] += 1
+        word_numbers[words[j]['normal_form']][-1] += 1
     word_fields = {k: [np.sum(v), np.mean(v)] for k, v in word_numbers.items()}
 
     for word in uniq_words:
@@ -287,7 +305,8 @@ def calculate_words_frequencies(words):
             'word': word,
             'frequency': round(word_fields[word][0] * 100 / len(words), 2),
             'average': round(word_fields[word][1], 2),
-            'words_num': len(words)
+            'words_num': len(words),
+            'word_forms': list(word_forms[word])
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
     return res
@@ -297,14 +316,16 @@ def calculate_phrases_frequencies(words, phrases):
     res = []
     #"""
     n = 0
-    terms = set([phrase[0] for phrase in phrases])
+    terms = set([phrase[0]['norm_phrase'] for phrase in phrases])
     uniq_phrases = []
     for term in terms:
         count = 0
+        forms = []
         for phrase in phrases:
-            if phrase[0] == term:
+            if phrase[0]['norm_phrase'] == term:
                 count += phrase[1]
-        uniq_phrases.append((term, count))
+                forms.append(phrase[0]['original_phrase'])
+        uniq_phrases.append((term, list(set(forms)), count))
         n += count
 
     pages_num = round(len(words) / 500)
@@ -313,9 +334,10 @@ def calculate_phrases_frequencies(words, phrases):
     for phrase in uniq_phrases:
         res.append({
             'word': phrase[0],
-            'frequency': round(phrase[1] * 100 / n, 2),
-            'average': round(phrase[1] / pages_num, 2),
-            'words_num': len(words)
+            'frequency': round(phrase[2] * 100 / n, 2),
+            'average': round(phrase[2] / pages_num, 2),
+            'words_num': len(words),
+            'word_forms': phrase[1]
         })
     res = sorted(res, key=lambda k: k['frequency'], reverse=True)
     #"""
@@ -432,8 +454,13 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
         if 1 < len(exist_words) < 4:
             words = [words_object.word for words_object in exist_words]
             phrase = ' '.join(words)
-            phrase = inflector.inflect(phrase, 'nomn')
-            res.append((phrase, term.count))
+            res.append((
+                {
+                    'original_phrase': ' '.join([word.get_word() for word in term.words]),
+                    'norm_phrase': inflector.inflect(phrase, 'nomn')
+                },
+                term.count
+            ))
     return res
 
 
@@ -536,8 +563,17 @@ def auto_processing(request):
 
                 keywords = phr[:5] + kws[:5]
                 for keyword in keywords:
-                    if not models.Keyword.objects.filter(word=keyword['word']).exists():
-                        models.Keyword(word=keyword['word']).save()
+                    db_keywords = models.Keyword.objects.filter(word=keyword['word'])
+                    if not db_keywords.exists():
+                        models.Keyword(
+                            word=keyword['word'],
+                            forms=json.dumps(keyword['word_forms'], ensure_ascii=False)
+                        ).save()
+                    else:
+                        for db_keyword in db_keywords:
+                            db_keyword.forms = json.dumps(
+                                list(set(json.loads(db_keyword.forms) + keyword['word_forms'])), ensure_ascii=False)
+                            db_keyword.save()
 
                 name = course['fullname']
                 db_courses = models.Course.objects.all()

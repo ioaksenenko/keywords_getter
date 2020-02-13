@@ -27,6 +27,7 @@
                                 </div>
                             </th>
                             <th scope="col">Ключевое слово</th>
+                            <th scope="col">Исходная форма</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -38,8 +39,15 @@
                                         <label class="custom-control-label" for="keyword-{{ keyword.id }}"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle" id="word-{{ keyword.id }}">
                                     {{ keyword.word }}
+                                </td>
+                                <td class="align-middle">
+                                    <div id="container-{{ keyword.id }}">
+                                        <span class="p-0 m-0" id="content-{{ keyword.id }}">{{ keyword.forms|from_json|join:", " }}</span>
+                                        <span class="collapse d-none" id="collapse-{{ keyword.id }}"></span>
+                                        <a id="collapse-link-{{ keyword.id }}" class="d-none" data-toggle="collapse" href="#collapse-{{ keyword.id }}" role="button" aria-expanded="false" aria-controls="collapse-{{ keyword.id }}">развернуть</a>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
