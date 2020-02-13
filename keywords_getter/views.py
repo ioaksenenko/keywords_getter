@@ -45,7 +45,7 @@ def index(request):
         shutil.rmtree(media_path)
     os.mkdir(media_path)
 
-    models.Keyword.objects.all().delete()
+    # models.Keyword.objects.all().delete()
     """
     courses = models.Course.objects.all()
     for course in courses:
