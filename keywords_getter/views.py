@@ -45,7 +45,7 @@ def index(request):
         shutil.rmtree(media_path)
     os.mkdir(media_path)
 
-    # models.Keyword.objects.all().delete()
+    models.Keyword.objects.all().delete()
     """
     courses = models.Course.objects.all()
     for course in courses:
@@ -448,9 +448,6 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
         for words_object in origin_words_objects:
             if words_object.tag.POS is not None and len(words_object.methods_stack) == 1:
                 exist_words_origin.append(words_object)
-            else:
-                if words_object.word in origin_words:
-                    origin_words.remove(words_object.word)
 
         words = term.normalized.split()
         words_objects = [morph_analyzer.parse(word)[0] for word in words]
@@ -458,16 +455,14 @@ def extract_phrases(term_extractor, morph_analyzer, inflector, text):
         for words_object in words_objects:
             if words_object.tag.POS is not None and len(words_object.methods_stack) == 1:
                 exist_words.append(words_object)
-            else:
-                if words_object.word in words:
-                    words.remove(words_object.word)
         if 1 < len(exist_words) < 4:
-            words = [words_object.word for words_object in exist_words]
-            phrase = ' '.join(words)
+            norm_phrase = ' '.join([words_object.word for words_object in exist_words])
+            norm_phrase = inflector.inflect(norm_phrase, 'nomn')
+            original_phrase = ' '.join([words_object.word for words_object in exist_words_origin])
             res.append((
                 {
-                    'original_phrase': ' '.join([words_object.word for words_object in exist_words_origin]),
-                    'norm_phrase': inflector.inflect(phrase, 'nomn')
+                    'original_phrase': original_phrase,
+                    'norm_phrase': norm_phrase
                 },
                 term.count
             ))
