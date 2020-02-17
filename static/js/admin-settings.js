@@ -25,7 +25,10 @@ $(document).ready(function () {
 
     $('#admin-settings').parent().addClass('active');
     remove_link();
-    add_collapse();
+    let edeted = add_collapse();
+    while (edeted) {
+        edeted = add_collapse();
+    }
 
     let collapses = $('[id^="collapse-"]');
     collapses.on('shown.bs.collapse', function () {
@@ -72,6 +75,7 @@ function select() {
 
 function add_collapse() {
     let containers = $('[id^="container-"]');
+    let edeted = false;
     containers.each(function (index, element) {
         let container = $(element);
         let id = container.prop('id').split('-')[1];
@@ -90,6 +94,7 @@ function add_collapse() {
         */
 
         if (original_height !== one_line_height) {
+            edeted = true;
             let collapse = $('#collapse-' + id);
             let collapse_link = $('#collapse-link-' + id);
             collapse.removeClass('d-none');
@@ -110,4 +115,5 @@ function add_collapse() {
             collapse.html(collapse_content.join(', '));
         }
     });
+    return edeted;
 }
