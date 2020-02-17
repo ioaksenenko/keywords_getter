@@ -26,8 +26,6 @@ $(document).ready(function () {
     $('#admin-settings').parent().addClass('active');
     remove_link();
     add_collapse();
-    add_collapse();
-    add_collapse();
 
     let collapses = $('[id^="collapse-"]');
     collapses.on('shown.bs.collapse', function () {
