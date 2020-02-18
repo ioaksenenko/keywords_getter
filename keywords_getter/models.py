@@ -29,3 +29,14 @@ class Keyword(models.Model):
             'exclude': self.exclude,
             'forms': self.forms
         })
+
+
+class Settings(models.Model):
+    setting_name = models.CharField(max_length=255, primary_key=True)
+    setting_value = models.CharField(max_length=255, default='')
+
+    def __str__(self):
+        return json.dumps({
+            'setting_name': self.setting_name,
+            'setting_value': self.setting_value,
+        })

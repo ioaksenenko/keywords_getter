@@ -69,7 +69,7 @@
                                                 <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru" target="_blank">{{ course.sdo }}</a>{% endif %}</td>
                                                 <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}<a href="https://{{ course.sdo }}.tusur.ru/course/view.php?id={{ course.cid|stringformat:'d' }}" target="_blank">{{ course.cid }}</a>{% endif %}</td>
                                                 <td class="align-middle {% if forloop.counter == keywords|length|div:2|add:1  %}borderless{% endif %}">{% if forloop.counter == 1 %}{{ keyword.words_num }}{% endif %}</td>
-                                                <td class="align-middle">{{ keyword.word }}</td>
+                                                <td class="align-middle {% if keyword.word|is_excluded %}disabled{% endif %}">{{ keyword.word }}</td>
                                                 <td class="align-middle">{{ keyword.average }}</td>
                                                 <td class="align-middle">{{ keyword.frequency }}</td>
                                             </tr>

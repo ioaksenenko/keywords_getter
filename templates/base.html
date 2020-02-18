@@ -34,13 +34,16 @@
                             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
                                     <li class="nav-item p-1 pl-2 pr-2">
+                                        <a href="{% url 'general-settings' %}" id="general-settings">Общие настройки</a>
+                                    </li>
+                                    <li class="nav-item p-1 pl-2 pr-2">
                                         <a href="{% url 'index' %}" id="courses-keywords">Курсы-кл.слова</a>
                                     </li>
                                     <li class="nav-item p-1 pl-2 pr-2">
                                         <a href="{% url 'word-courses' %}" id="keywords-courses">Слова-Курсы</a>
                                     </li>
                                     <li class="nav-item p-1 pl-2 pr-2">
-                                        <a href="{% url 'admin-settings' %}" id="admin-settings">Настройка исключений</a>
+                                        <a href="{% url 'admin-settings' %}" id="admin-settings">Исключения</a>
                                     </li>
                                     <li class="nav-item p-1 pl-2 pr-2">
                                         <a href="{% url 'courses' %}" id="auto-processing">Автообработка</a>

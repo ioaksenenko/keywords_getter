@@ -1,6 +1,7 @@
 import json
 
 from django import template
+from keywords_getter import models
 
 
 register = template.Library()
@@ -22,3 +23,10 @@ def is_all_exclude(keywords):
 @register.filter
 def div(lhs, rhs):
     return lhs / rhs
+
+
+@register.filter
+def is_excluded(word):
+    records = models.Keyword.objects.filter(word=word)
+    for record in records:
+        return record.exclude

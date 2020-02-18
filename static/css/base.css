@@ -2,3 +2,7 @@
     background-color: rgb(225, 227, 229);
     font-weight: 500;
 }
+
+.disabled {
+    color: rgb(191, 192, 193) !important;
+}

@@ -46,6 +46,7 @@ def index(request):
     os.mkdir(media_path)
 
     # models.Keyword.objects.all().delete()
+    # models.Settings.objects.all().delete()
     """
     courses = models.Course.objects.all()
     for course in courses:
@@ -67,7 +68,8 @@ def get_keywords(request):
         for i in range(len(cid_list)):
             kws = calculate_words_frequencies(words_groups[i])
             phr = calculate_phrases_frequencies(words_groups[i], phrases_groups[i])
-            keywords = phr[:5] + kws[:5]
+            keywords_number = int(models.Settings.objects.filter(setting_name='keywords_number').first().setting_value)
+            keywords = phr[:keywords_number] + kws[:keywords_number]
             for keyword in keywords:
                 db_keywords = models.Keyword.objects.filter(word=keyword['word'])
                 if not db_keywords.exists():
@@ -565,8 +567,9 @@ def auto_processing(request):
             for i in range(len(cid_list)):
                 kws = calculate_words_frequencies(words_groups[i])
                 phr = calculate_phrases_frequencies(words_groups[i], phrases_groups[i])
+                keywords_number = int(models.Settings.objects.filter(setting_name='keywords_number').first().setting_value)
 
-                keywords = phr[:5] + kws[:5]
+                keywords = phr[:keywords_number] + kws[:keywords_number]
                 for keyword in keywords:
                     db_keywords = models.Keyword.objects.filter(word=keyword['word'])
                     if not db_keywords.exists():
@@ -844,3 +847,31 @@ def courses(request):
         } for idx in df_courses.index]
     }
     return render(request, 'courses.html', context)
+
+
+def general_settings(request):
+    settings = models.Settings.objects.all()
+    if request.method == 'POST':
+        keywords_number = request.POST.get('keywords-number')
+        if settings.filter(setting_name='keywords_number').exists():
+            setting = settings.filter(setting_name='keywords_number').first()
+            setting.setting_value = keywords_number
+        else:
+            setting = models.Settings(
+                setting_name='keywords_number',
+                setting_value=keywords_number
+            )
+        setting.save()
+    else:
+        if not settings.filter(setting_name='keywords_number').exists():
+            setting = models.Settings(
+                setting_name='keywords_number',
+                setting_value=5
+            )
+            setting.save()
+        else:
+            setting = settings.filter(setting_name='keywords_number').first()
+    context = {
+        'keywords_number': setting.setting_value
+    }
+    return render(request, 'general-settings.html', context)

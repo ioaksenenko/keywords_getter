@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/general-settings.css" %}" />
+    <script src="{% static "js/general-settings.js" %}"></script>
+{% endblock %}
+{% block main %}
+    <form action="{% url 'general-settings' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="container-fluid mt-3 mb-3">
+            <div class="row align-items-center mt-3 mb-3">
+                <div class="col">
+                    <h5>Общие настройки</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <div class="form-group">
+                        <label for="keywords-number">ТОП-X слов и фраз</label>
+                        <input type="text" class="form-control" id="keywords-number" name="keywords-number" placeholder="" value="{{ keywords_number }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary" id="apply">Применить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
