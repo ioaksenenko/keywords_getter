@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    let time = new Date($.now());
+
     let checkboxes = $('input[type="checkbox"][name="keywords"]');
     let checked = $('input[type="checkbox"][name="keywords"]:checked');
     let check_all = $('#check-all');
@@ -25,10 +27,11 @@ $(document).ready(function () {
 
     $('#admin-settings').parent().addClass('active');
     remove_link();
-    let edeted = add_collapse();
+    add_collapse();
+    /*let edeted = add_collapse();
     while (edeted) {
         edeted = add_collapse();
-    }
+    }*/
 
     let collapses = $('[id^="collapse-"]');
     collapses.on('shown.bs.collapse', function () {
@@ -39,7 +42,8 @@ $(document).ready(function () {
 
         comma.removeClass('d-none');
         link.text('свернуть');
-        content.text(content.text() + ', ')
+        let content_text = content.text();
+        content.text(content_text !== '' ? content_text + ', ' : '');
     });
     collapses.on('hidden.bs.collapse', function () {
         let id = $(this).prop('id').split('-')[1];
@@ -50,6 +54,56 @@ $(document).ready(function () {
         comma.addClass('d-none');
         link.text('развернуть');
         content.text(content.text().substr(0, content.text().length - 2));
+    });
+
+    time = new Date($.now()) - time;
+    console.log(time);
+
+    let join = $('#join-modal');
+    let join_row = join.parent().parent();
+    $('tr').click(function () {
+        if ($(this).hasClass('table-info')) {
+            $(this).removeClass('table-info');
+        } else {
+            $(this).addClass('table-info');
+        }
+        let selected_rows = $('.table-info');
+        if (selected_rows.length > 1) {
+            join_row.removeClass('d-none');
+        } else {
+            if (!join_row.hasClass('d-none')) {
+                join_row.addClass('d-none');
+            }
+        }
+    });
+    let nf_select = $('#normal-form');
+    let keywords = [];
+    join.click(function () {
+        $('.table-info').each(function (i, e) {
+            let keyword = {};
+            keyword['normal-form'] = $(e).find('td:eq(1)').text().trim();
+            nf_select.append('<option>' + keyword['normal-form'] + '</option>');
+            keyword['original-forms'] = [];
+            $(e).find('td:eq(2) div span').each(function (i, e) {
+                keyword['original-forms'] = $.merge(keyword['original-forms'], $(e).text().split(', '));
+            });
+            keywords.push(keyword);
+        });
+    });
+    $('#join').click(function () {
+        $.ajax({
+            dataType: "html",
+            method: "GET",
+            url: "/join/",
+            data: {
+                keywords: JSON.stringify(keywords),
+                normal_form: nf_select.val()
+            }
+        }).done(function (response) {
+            location.reload();
+        }).fail(function (response) {
+            console.log(response);
+        });
     });
 });
 

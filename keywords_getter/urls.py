@@ -33,6 +33,7 @@ urlpatterns = [
     path('exclude-words/', views.exclude_words, name='exclude-words'),
     path('courses/', views.courses, name='courses'),
     path('general-settings/', views.general_settings, name='general-settings'),
+    path('join/', views.join, name='join'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

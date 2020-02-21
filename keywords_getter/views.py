@@ -875,3 +875,34 @@ def general_settings(request):
         'keywords_number': setting.setting_value
     }
     return render(request, 'general-settings.html', context)
+
+
+def join(request):
+    keywords = json.loads(request.GET.get('keywords'))
+    normal_form = request.GET.get('normal_form')
+    forms = []
+    normal_forms = []
+    for keyword in keywords:
+        normal_forms.append(keyword['normal-form'])
+        records = models.Keyword.objects.filter(word=keyword['normal-form'])
+        if records.exists():
+            record = records.first()
+            forms += json.loads(record.forms)
+            record.delete()
+    normal_forms.remove(normal_form)
+    models.Keyword(
+        word=normal_form,
+        forms=json.dumps(forms)
+    ).save()
+    courses = models.Course.objects.all()
+    for course in courses:
+        keywords = json.loads(course.keywords)
+        is_changed = False
+        for keyword in keywords:
+            if keyword['word'] in normal_forms:
+                keyword['word'] = normal_form
+                is_changed = True
+        if is_changed:
+            course.keywords = json.dumps(keywords)
+            course.save()
+    return redirect('/admin-settings/')

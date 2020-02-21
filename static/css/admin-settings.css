@@ -1,0 +1,11 @@
+.pop-up-button {
+    position:fixed;
+    bottom: 0;
+    right: 2%;
+    font-size: 2.5rem;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.pop-up-button:hover {
+    opacity: 1;
+}
